@@ -37,6 +37,7 @@ class SetupActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         refreshStatus()
+        com.kleanthi.obsidianwidget.widget.WidgetRefresher.refreshAll(this)
     }
 
     private fun refreshStatus() {
