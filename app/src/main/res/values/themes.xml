@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.ObsidianWidget" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.ObsidianWidget.Dialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+</resources>
