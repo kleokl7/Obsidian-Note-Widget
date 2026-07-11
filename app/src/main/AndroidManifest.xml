@@ -16,5 +16,21 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".editor.EditorActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.ObsidianWidget.Dialog" />
+        <receiver android:name=".widget.NoteWidgetProvider" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/note_widget_info" />
+        </receiver>
+        <service
+            android:name=".widget.NoteWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 </manifest>
