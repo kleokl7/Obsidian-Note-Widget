@@ -86,7 +86,13 @@
         android:id="@+id/hide_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/config_hide_done"
+        android:text="@string/config_hide_done" />
+
+    <CheckBox
+        android:id="@+id/show_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/config_show_count"
         android:paddingBottom="4dp" />
 
     <TextView

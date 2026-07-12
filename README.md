@@ -24,7 +24,9 @@ time Obsidian runs.
   (interaction, opening the app, or the 15-min cycle).
 - ✏️ opens the note in the Obsidian app. ⚙ opens the widget's settings.
   Tapping a heading collapses/expands its section; headings show an
-  open-task count for their section. Tapping a plain text row opens the
+  open-task count for their section. The ⊖/⊕ button next to the title
+  collapses or expands all sections at once, and an optional setting
+  shows the note's total open-task count in the title. Tapping a plain text row opens the
   popup viewer — rendered markdown with tappable checkboxes, and an Edit
   button for raw-markdown editing.
 - Per-widget settings: theme, background opacity, text size, hide

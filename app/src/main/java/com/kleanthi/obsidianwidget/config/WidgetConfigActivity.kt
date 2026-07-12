@@ -100,6 +100,12 @@ class WidgetConfigActivity : AppCompatActivity() {
             applyChange { WidgetPrefs.setHideDone(this, appWidgetId, checked) }
         }
 
+        val showCount = findViewById<CheckBox>(R.id.show_count)
+        showCount.isChecked = WidgetPrefs.getShowCount(this, appWidgetId)
+        showCount.setOnCheckedChangeListener { _, checked ->
+            applyChange { WidgetPrefs.setShowCount(this, appWidgetId, checked) }
+        }
+
         findViewById<TextView>(R.id.daily_button).setOnClickListener {
             WidgetPrefs.setNote(this, appWidgetId, WidgetPrefs.DAILY)
             NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)

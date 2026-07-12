@@ -5,6 +5,8 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
 import com.kleanthi.obsidianwidget.R
+import com.kleanthi.obsidianwidget.core.BlockType
+import com.kleanthi.obsidianwidget.core.MarkdownParser
 import com.kleanthi.obsidianwidget.core.TaskToggler
 import com.kleanthi.obsidianwidget.core.ToggleResult
 import com.kleanthi.obsidianwidget.editor.EditorActivity
@@ -47,8 +49,29 @@ class WidgetActionActivity : Activity() {
             NoteWidgetProvider.ACT_FOLD_HEAD -> {
                 val key = intent.getStringExtra(NoteWidgetProvider.EXTRA_EXPECTED)
                 if (key != null) WidgetPrefs.toggleHeadingCollapsed(this, widgetId, key)
-                AppWidgetManager.getInstance(this)
-                    .notifyAppWidgetViewDataChanged(widgetId, R.id.block_list)
+                // Full update: the ⊖/⊕ header glyph tracks the collapsed set.
+                NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), widgetId)
+            }
+            NoteWidgetProvider.ACT_FOLD_ALL -> {
+                val repo = VaultRepository(this)
+                val path = WidgetPrefs.resolveNote(this, widgetId, repo)
+                val content = path?.let { repo.readNote(it) }
+                if (content != null) {
+                    if (WidgetPrefs.getCollapsedHeadings(this, widgetId).isEmpty()) {
+                        // Collapse all: keys mirror the factory's "text#occurrence" scheme.
+                        val seen = mutableMapOf<String, Int>()
+                        val keys = mutableSetOf<String>()
+                        for (b in MarkdownParser.parse(content)) {
+                            if (b.type == BlockType.HEADING) {
+                                keys.add("${b.text}#${seen.merge(b.text, 1, Int::plus)!!}")
+                            }
+                        }
+                        WidgetPrefs.setCollapsedHeadings(this, widgetId, keys)
+                    } else {
+                        WidgetPrefs.setCollapsedHeadings(this, widgetId, emptySet())
+                    }
+                }
+                NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), widgetId)
             }
             NoteWidgetProvider.ACT_EDIT -> {
                 startActivity(

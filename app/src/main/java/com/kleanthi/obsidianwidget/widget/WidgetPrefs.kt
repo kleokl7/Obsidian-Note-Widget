@@ -77,6 +77,7 @@ object WidgetPrefs {
             .remove("opacity_$appWidgetId")
             .remove("font_$appWidgetId")
             .remove("hidedone_$appWidgetId")
+            .remove("showcount_$appWidgetId")
             .remove("daily_date_$appWidgetId")
             .remove("daily_path_$appWidgetId")
             .apply()
@@ -96,11 +97,23 @@ object WidgetPrefs {
     // collapsed ones. Keys carry an occurrence index ("Today#1") because the
     // same heading text often repeats within a note.
     fun isHeadingCollapsed(context: Context, appWidgetId: Int, key: String): Boolean =
-        prefs(context).getStringSet("collapsedheads_$appWidgetId", emptySet())!!.contains(key)
+        getCollapsedHeadings(context, appWidgetId).contains(key)
 
     fun toggleHeadingCollapsed(context: Context, appWidgetId: Int, key: String) {
-        val cur = HashSet(prefs(context).getStringSet("collapsedheads_$appWidgetId", emptySet())!!)
+        val cur = HashSet(getCollapsedHeadings(context, appWidgetId))
         if (!cur.add(key)) cur.remove(key)
-        prefs(context).edit().putStringSet("collapsedheads_$appWidgetId", cur).apply()
+        setCollapsedHeadings(context, appWidgetId, cur)
     }
+
+    fun getCollapsedHeadings(context: Context, appWidgetId: Int): Set<String> =
+        prefs(context).getStringSet("collapsedheads_$appWidgetId", emptySet())!!
+
+    fun setCollapsedHeadings(context: Context, appWidgetId: Int, keys: Set<String>) =
+        prefs(context).edit().putStringSet("collapsedheads_$appWidgetId", keys).apply()
+
+    fun setShowCount(context: Context, appWidgetId: Int, show: Boolean) =
+        prefs(context).edit().putBoolean("showcount_$appWidgetId", show).apply()
+
+    fun getShowCount(context: Context, appWidgetId: Int): Boolean =
+        prefs(context).getBoolean("showcount_$appWidgetId", false)
 }

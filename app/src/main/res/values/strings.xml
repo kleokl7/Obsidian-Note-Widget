@@ -19,6 +19,7 @@
     <string name="config_font_medium">Default</string>
     <string name="config_font_large">Large</string>
     <string name="config_hide_done">Hide completed tasks</string>
+    <string name="config_show_count">Show open-task count in title</string>
     <string name="config_daily">📅 Show today\'s daily note</string>
     <string name="widget_edit_glyph">✏️</string>
     <string name="widget_settings_glyph">⚙</string>
