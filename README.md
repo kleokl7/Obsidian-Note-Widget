@@ -1,43 +1,60 @@
 # Obsidian Note Widget
 
 Android home-screen widgets for Obsidian notes: rendered markdown, tappable
-task checkboxes, and a popup editor — without opening Obsidian. Works by
-reading/writing vault files directly; Obsidian Sync picks changes up next
+task checkboxes, and a popup viewer/editor — without opening Obsidian. Works
+by reading/writing vault files directly; Obsidian Sync picks changes up next
 time Obsidian runs.
 
+## Features
+
+- **Rendered markdown** on the home screen: headings, bold/italic, links,
+  `==highlights==`, inline code, quotes, bullets, task lists.
+- **Tappable tasks** — toggling writes `- [ ]`/`- [x]` to the file
+  immediately. Custom task states from the Tasks plugin render with their
+  own glyphs (`/` in progress, `-` cancelled, `>` forwarded).
+- **Folding** — tasks with sub-items fold; tapping a heading collapses its
+  whole section; the ⊖/⊕ header button collapses or expands everything.
+  Headings show an open-task count for their section.
+- **Popup viewer/editor** — tapping a text row opens the note rendered, with
+  tappable checkboxes; an Edit button switches to raw markdown.
+- **Daily-note mode** — a widget can follow today's `YYYY-MM-DD.md`
+  automatically.
+- **Theming** — warm paper light mode and warm charcoal dark mode (the
+  [Claude Code Obsidian Theme](https://github.com/kleokl7/Claude-Code-Obsidian-Theme)
+  palette), following the device or forced per widget.
+- ✏️ deep-links into the note in the Obsidian app; ⚙ opens the widget's
+  settings.
+
 ## Install
+
 1. Download the APK from the [Releases](../../releases) page onto your phone
    and tap it. Allow "install unknown apps" for your file manager when
    prompted.
 2. Open **Obsidian Widget** → *Choose vault folder* → pick your vault.
 3. Long-press the home screen → Widgets → Obsidian Widget → pick a note.
 
-## Notes
-- The vault must be in shared storage (a folder a file manager can see),
-  not Obsidian's private app storage.
-- Task checkboxes toggle `- [ ]`/`- [x]` in the file immediately.
-- Each widget has a System / Light / Dark theme setting (warm paper light,
-  warm charcoal dark — the [Claude Code Obsidian Theme](https://github.com/kleokl7/Claude-Code-Obsidian-Theme)
-  palette). Pick it when adding the widget, or long-press the widget →
-  edit/settings to change it later. In System mode the widget follows the
-  device theme; after a device theme flip it catches up on the next refresh
-  (interaction, opening the app, or the 15-min cycle).
-- ✏️ opens the note in the Obsidian app. ⚙ opens the widget's settings.
-  Tapping a heading collapses/expands its section; headings show an
-  open-task count for their section. The ⊖/⊕ button next to the title
-  collapses or expands all sections at once, and an optional setting
-  shows the note's total open-task count in the title. Tapping a plain text row opens the
-  popup viewer — rendered markdown with tappable checkboxes, and an Edit
-  button for raw-markdown editing.
-- Per-widget settings: theme, background opacity, text size, hide
-  completed tasks, and the displayed note — including "Show today's
-  daily note", which follows the file named `YYYY-MM-DD.md` anywhere
-  in the vault.
-- The app screen lists every active widget with its note and theme —
-  tap one to change its settings.
-- Widget refreshes on interaction, when the app opens, and every 15 min.
+The vault must be in shared storage (a folder a file manager can see), not
+Obsidian's private app storage (Settings → About → Vault location on
+Android).
+
+## Per-widget settings
+
+Open with the widget's ⚙ button, or from the app's widget list (one card
+per active widget). Each widget independently has:
+
+- Theme: System / Light / Dark
+- Background opacity (fades the card, not the text)
+- Text size: Small / Default / Large
+- Hide completed tasks (includes cancelled tasks and their sub-items)
+- Open-task count in the widget title (off by default)
+- The displayed note, or "Show today's daily note"
+
+Widgets refresh on interaction, when the app opens, and every 15 minutes.
+In System theme mode, a device light/dark flip is picked up on the next
+refresh.
 
 ## Build
+
 Needs Android SDK 34 (point `local.properties` at it, or set `ANDROID_HOME`).
 
 - `./gradlew assembleDebug` — works out of the box, signed with the debug key.
@@ -56,6 +73,7 @@ Needs Android SDK 34 (point `local.properties` at it, or set `ANDROID_HOME`).
   install — uninstall/reinstall on the phone.
 
 ## License
+
 [MIT](LICENSE)
 
 This is an unofficial community project, not affiliated with or endorsed by

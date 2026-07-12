@@ -2,37 +2,197 @@
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
 
-    <!-- Knapped obsidian arrowhead: glassy black stone, chipped edges, notched tang -->
-
-    <!-- Silhouette / right face (darkest) -->
-    <path android:fillColor="#101109"
-        android:pathData="M54,21 L61,32 L59.5,35 L66.5,46 L65,50 L71,61 L69.5,64 L73.5,72
-            L66,69 L62,76 L54,70 L46,76 L42,69 L34.5,72
-            L38.5,64 L36.5,60 L43,49 L41.5,45 L47.5,34 L49,31 Z" />
-
-    <!-- Left face (catches the light) -->
-    <path android:fillColor="#22241D"
-        android:pathData="M54,21 L49,31 L47.5,34 L41.5,45 L43,49 L36.5,60 L38.5,64 L34.5,72
-            L42,69 L46,76 L54,70 L52,52 L50,36 Z" />
-
-    <!-- Central ridge facet -->
-    <path android:fillColor="#2C2E26"
-        android:pathData="M54,21 L57.5,36 L56,54 L54,70 L52,54 L50,36 Z" />
-
-    <!-- Chip facets along the edges -->
-    <path android:fillColor="#2A2C24" android:pathData="M66.5,46 L65,50 L60,47.5 Z" />
-    <path android:fillColor="#2E3028" android:pathData="M43,49 L41.5,45 L46,47 Z" />
-    <path android:fillColor="#1E2019" android:pathData="M71,61 L69.5,64 L64.5,61 Z" />
-
-    <!-- Glass sheen streaks -->
-    <path android:fillColor="#38F6F4EE" android:pathData="M49.5,32 L53.5,30 L46,55 L42.5,57 Z" />
-    <path android:fillColor="#21F6F4EE" android:pathData="M57,42 L60,41 L55.5,62 L52.5,63 Z" />
-
-    <!-- Bright knap highlights -->
-    <path android:fillColor="#73F6F4EE" android:pathData="M54,21 L56,26 L52.5,25 Z" />
-    <path android:fillColor="#80F6F4EE" android:pathData="M61,32 L59.5,35 L57.5,32.5 Z" />
-
-    <!-- Coral edge glints (theme accent) -->
-    <path android:fillColor="#8CD97757" android:pathData="M42,69 L46,76 L45,71 Z" />
-    <path android:fillColor="#80D97757" android:pathData="M69.5,64 L71.5,68 L68,66 Z" />
+    <!-- Voxel-style obsidian cube (original pattern, seeded) -->
+    <path android:fillColor="#241738" android:pathData="M54.00,24.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M50.50,26.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#6B34B8" android:pathData="M47.00,28.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M43.50,30.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M40.00,32.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M36.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M33.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M29.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M57.50,26.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M54.00,28.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M50.50,30.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M47.00,32.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M43.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M40.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M36.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M33.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#A855F7" android:pathData="M61.00,28.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#8B45E0" android:pathData="M57.50,30.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M54.00,32.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M50.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M47.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M43.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M40.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M36.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M64.50,30.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M61.00,32.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M57.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M54.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M50.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M47.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M43.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M40.00,44.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M68.00,32.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M64.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M61.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M57.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#C084FC" android:pathData="M54.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#C084FC" android:pathData="M50.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M47.00,44.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M43.50,46.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M71.50,34.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M68.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M64.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M61.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M57.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M54.00,44.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M50.50,46.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M47.00,48.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#8B45E0" android:pathData="M75.00,36.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M71.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M68.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M64.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#6B34B8" android:pathData="M61.00,44.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,46.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#A855F7" android:pathData="M54.00,48.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M50.50,50.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M78.50,38.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#3B1E5C" android:pathData="M75.00,40.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M71.50,42.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M68.00,44.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M64.50,46.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#241738" android:pathData="M61.00,48.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#8B45E0" android:pathData="M57.50,50.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#52288A" android:pathData="M54.00,52.00 l3.50,2.00 l-3.50,2.00 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M26.00,40.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M26.00,43.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M26.00,47.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M26.00,51.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#2E1848" android:pathData="M26.00,55.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M26.00,58.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M26.00,62.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M26.00,66.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M29.50,42.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#2E1848" android:pathData="M29.50,45.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M29.50,49.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M29.50,53.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M29.50,57.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M29.50,60.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M29.50,64.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M29.50,68.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#7038C9" android:pathData="M33.00,44.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M33.00,47.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M33.00,51.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M33.00,55.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M33.00,59.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M33.00,62.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M33.00,66.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M33.00,70.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,46.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#7038C9" android:pathData="M36.50,49.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,53.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,57.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#2E1848" android:pathData="M36.50,61.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,64.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,68.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M36.50,72.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M40.00,48.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M40.00,51.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M40.00,55.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M40.00,59.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M40.00,63.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M40.00,66.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#54289C" android:pathData="M40.00,70.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M40.00,74.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M43.50,50.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M43.50,53.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M43.50,57.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M43.50,61.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#54289C" android:pathData="M43.50,65.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M43.50,68.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M43.50,72.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M43.50,76.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#2E1848" android:pathData="M47.00,52.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#54289C" android:pathData="M47.00,55.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M47.00,59.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#54289C" android:pathData="M47.00,63.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M47.00,67.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M47.00,70.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#1B1124" android:pathData="M47.00,74.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M47.00,78.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M50.50,54.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#7038C9" android:pathData="M50.50,57.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M50.50,61.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#2E1848" android:pathData="M50.50,65.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M50.50,69.00 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#40206B" android:pathData="M50.50,72.75 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0B0610" android:pathData="M50.50,76.50 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#150D1B" android:pathData="M50.50,80.25 l3.50,2.00 l0.00,3.75 l-3.50,-2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M54.00,56.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M54.00,59.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M54.00,63.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M54.00,67.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M54.00,71.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M54.00,74.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M54.00,78.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M54.00,82.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M57.50,54.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,57.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,61.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,65.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M57.50,69.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,72.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,76.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M57.50,80.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M61.00,52.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M61.00,55.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M61.00,59.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M61.00,63.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#5C2CA6" android:pathData="M61.00,67.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M61.00,70.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M61.00,74.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M61.00,78.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M64.50,50.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M64.50,53.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M64.50,57.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M64.50,61.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M64.50,65.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#442278" android:pathData="M64.50,68.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M64.50,72.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M64.50,76.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M68.00,48.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M68.00,51.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M68.00,55.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#5C2CA6" android:pathData="M68.00,59.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M68.00,63.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M68.00,66.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M68.00,70.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M68.00,74.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M71.50,46.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M71.50,49.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M71.50,53.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M71.50,57.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M71.50,61.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M71.50,64.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M71.50,68.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M71.50,72.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M75.00,44.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M75.00,47.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M75.00,51.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M75.00,55.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M75.00,59.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M75.00,62.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M75.00,66.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M75.00,70.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#0E0812" android:pathData="M78.50,42.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M78.50,45.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#5C2CA6" android:pathData="M78.50,49.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#331A52" android:pathData="M78.50,53.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M78.50,57.00 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#130B18" android:pathData="M78.50,60.75 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#241238" android:pathData="M78.50,64.50 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
+    <path android:fillColor="#080409" android:pathData="M78.50,68.25 l3.50,-2.00 l0.00,3.75 l-3.50,2.00 Z" />
 </vector>
