@@ -64,6 +64,9 @@ class WidgetConfigActivity : AppCompatActivity() {
         list.setOnItemClickListener { _, _, pos, _ ->
             val note = shown[pos]
             WidgetPrefs.setNote(this, appWidgetId, note.relPath)
+            // The launcher only renders on first configure; reconfigure paths
+            // (widget ⚙ button, app widget list) need an explicit update.
+            NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
             setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId))
             finish()
         }

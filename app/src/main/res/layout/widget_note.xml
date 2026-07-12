@@ -34,13 +34,13 @@
             android:text="@string/widget_edit_glyph" />
 
         <TextView
-            android:id="@+id/btn_obsidian"
+            android:id="@+id/btn_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="8dp"
             android:textSize="16sp"
             android:textColor="@color/accent"
-            android:text="@string/widget_open_glyph" />
+            android:text="@string/widget_settings_glyph" />
     </LinearLayout>
 
     <ListView

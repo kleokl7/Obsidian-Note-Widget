@@ -8,7 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
 import com.kleanthi.obsidianwidget.R
-import com.kleanthi.obsidianwidget.editor.EditorActivity
+import com.kleanthi.obsidianwidget.config.WidgetConfigActivity
 import com.kleanthi.obsidianwidget.vault.VaultRepository
 
 class NoteWidgetProvider : AppWidgetProvider() {
@@ -29,7 +29,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
             val palette = Themes.forWidget(context, appWidgetId)
             views.setInt(R.id.widget_root, "setBackgroundResource", palette.bgRes)
             views.setTextColor(R.id.widget_title, palette.heading)
-            views.setTextColor(R.id.btn_obsidian, palette.accent)
+            views.setTextColor(R.id.btn_settings, palette.accent)
             views.setTextColor(R.id.empty_view, palette.muted)
 
             views.setTextViewText(
@@ -56,20 +56,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 )
             )
 
-            // ✏️ opens the popup editor.
-            val editIntent = Intent(context, EditorActivity::class.java)
-                .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                .setData(Uri.parse("obsidianwidget://edit/$appWidgetId"))
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            views.setOnClickPendingIntent(
-                R.id.btn_edit,
-                PendingIntent.getActivity(
-                    context, appWidgetId * 4 + 1, editIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                )
-            )
-
-            // ◆ deep-links into Obsidian at this note.
+            // ✏️ opens this note in the Obsidian app.
             val vaultName = VaultRepository(context).vaultName
             if (vaultName != null && notePath != null) {
                 val deepLink = Intent(
@@ -80,13 +67,26 @@ class NoteWidgetProvider : AppWidgetProvider() {
                     )
                 ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 views.setOnClickPendingIntent(
-                    R.id.btn_obsidian,
+                    R.id.btn_edit,
                     PendingIntent.getActivity(
-                        context, appWidgetId * 4 + 2, deepLink,
+                        context, appWidgetId * 4 + 1, deepLink,
                         PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                     )
                 )
             }
+
+            // ⚙ opens widget settings (theme + note choice).
+            val settingsIntent = Intent(context, WidgetConfigActivity::class.java)
+                .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+                .setData(Uri.parse("obsidianwidget://config/$appWidgetId"))
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            views.setOnClickPendingIntent(
+                R.id.btn_settings,
+                PendingIntent.getActivity(
+                    context, appWidgetId * 4 + 2, settingsIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+            )
 
             // Tapping the empty state opens the app.
             views.setOnClickPendingIntent(

@@ -22,7 +22,11 @@ time Obsidian runs.
   edit/settings to change it later. In System mode the widget follows the
   device theme; after a device theme flip it catches up on the next refresh
   (interaction, opening the app, or the 15-min cycle).
-- ✏️ opens the popup editor (raw markdown). ◆ opens the note in Obsidian.
+- ✏️ opens the note in the Obsidian app. ⚙ opens the widget's settings
+  (theme + displayed note). Tapping a plain text row opens the popup
+  editor (raw markdown).
+- The app screen lists every active widget with its note and theme —
+  tap one to change its settings.
 - Widget refreshes on interaction, when the app opens, and every 15 min.
 
 ## Build
