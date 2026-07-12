@@ -93,7 +93,9 @@ class NoteRemoteViewsFactory(
                 }
             } else body
             rv.setTextViewText(R.id.task_text, text)
-            rv.setViewPadding(R.id.task_row, (b.indent * 16 * density).toInt(), 0, 0, 0)
+            // setViewPadding sets all four sides — keep the XML's 4dp vertical padding.
+            val pad = (4 * density).toInt()
+            rv.setViewPadding(R.id.task_row, (b.indent * 16 * density).toInt(), pad, 0, pad)
 
             // Checkbox toggles done; task text folds/unfolds its children.
             rv.setOnClickFillInIntent(R.id.task_checkbox, Intent().apply {
@@ -110,7 +112,8 @@ class NoteRemoteViewsFactory(
         } else {
             rv = RemoteViews(context.packageName, R.layout.row_text)
             rv.setTextViewText(R.id.block_text, SpanMapper.render(b))
-            rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), 0, 0, 0)
+            val pad = (3 * density).toInt()
+            rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), pad, 0, pad)
             rv.setOnClickFillInIntent(R.id.block_text, Intent().apply {
                 putExtra(NoteWidgetProvider.EXTRA_WIDGET_ID, appWidgetId)
                 putExtra(NoteWidgetProvider.EXTRA_ACTION, NoteWidgetProvider.ACT_EDIT)

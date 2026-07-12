@@ -4,3 +4,4 @@ local.properties
 keystore.properties
 *.keystore
 .DS_Store
+*.apk
