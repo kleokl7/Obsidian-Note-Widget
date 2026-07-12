@@ -37,6 +37,66 @@
             android:text="@string/config_theme_dark" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/opacity_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:id="@+id/opacity_seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="10"
+        android:max="100"
+        android:paddingVertical="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/config_font_label"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/font_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/font_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_font_small" />
+
+        <RadioButton
+            android:id="@+id/font_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_font_medium" />
+
+        <RadioButton
+            android:id="@+id/font_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_font_large" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/hide_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/config_hide_done"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:id="@+id/daily_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/config_daily"
+        android:textStyle="bold"
+        android:paddingVertical="12dp" />
+
     <EditText
         android:id="@+id/search_box"
         android:layout_width="match_parent"

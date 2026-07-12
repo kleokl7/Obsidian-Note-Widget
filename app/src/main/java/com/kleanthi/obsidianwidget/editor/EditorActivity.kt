@@ -30,7 +30,7 @@ class EditorActivity : AppCompatActivity() {
             AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID
         )
         repo = VaultRepository(this)
-        notePath = WidgetPrefs.getNote(this, widgetId)
+        notePath = WidgetPrefs.resolveNote(this, widgetId, repo)
         val path = notePath
         if (path == null) { finish(); return }
 

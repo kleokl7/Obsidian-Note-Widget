@@ -28,7 +28,7 @@ class WidgetActionActivity : Activity() {
                 val line = intent.getIntExtra(NoteWidgetProvider.EXTRA_LINE, -1)
                 val expected = intent.getStringExtra(NoteWidgetProvider.EXTRA_EXPECTED)
                 val repo = VaultRepository(this)
-                val path = WidgetPrefs.getNote(this, widgetId)
+                val path = WidgetPrefs.resolveNote(this, widgetId, repo)
                 val content = path?.let { repo.readNote(it) }
                 if (expected != null && path != null && content != null) {
                     when (val r = TaskToggler.toggle(content, line, expected)) {

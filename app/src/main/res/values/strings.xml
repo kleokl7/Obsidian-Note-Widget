@@ -13,6 +13,13 @@
     <string name="config_theme_system">System</string>
     <string name="config_theme_light">Light</string>
     <string name="config_theme_dark">Dark</string>
+    <string name="config_opacity_label">Background opacity: %1$d%%</string>
+    <string name="config_font_label">Text size</string>
+    <string name="config_font_small">Small</string>
+    <string name="config_font_medium">Default</string>
+    <string name="config_font_large">Large</string>
+    <string name="config_hide_done">Hide completed tasks</string>
+    <string name="config_daily">📅 Show today\'s daily note</string>
     <string name="widget_edit_glyph">✏️</string>
     <string name="widget_settings_glyph">⚙</string>
     <string name="widget_empty">No note selected or note unreadable.\nTap to open the app.</string>

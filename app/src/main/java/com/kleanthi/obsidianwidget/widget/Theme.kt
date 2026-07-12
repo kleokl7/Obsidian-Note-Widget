@@ -6,6 +6,11 @@ import com.kleanthi.obsidianwidget.R
 
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
+/** Body text size with a matching checkbox-glyph size. */
+enum class FontSize(val body: Float, val glyph: Float) {
+    SMALL(12f, 15f), MEDIUM(14f, 17f), LARGE(16f, 19f)
+}
+
 data class Palette(
     val bg: Int,
     val text: Int,

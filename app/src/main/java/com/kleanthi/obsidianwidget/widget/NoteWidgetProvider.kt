@@ -23,18 +23,25 @@ class NoteWidgetProvider : AppWidgetProvider() {
         const val ACT_EDIT = "edit"
 
         fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-            val notePath = WidgetPrefs.getNote(context, appWidgetId)
+            val repo = VaultRepository(context)
+            val prefNote = WidgetPrefs.getNote(context, appWidgetId)
+            val notePath = WidgetPrefs.resolveNote(context, appWidgetId, repo)
             val views = RemoteViews(context.packageName, R.layout.widget_note)
 
             val palette = Themes.forWidget(context, appWidgetId)
-            views.setInt(R.id.widget_root, "setBackgroundResource", palette.bgRes)
+            views.setImageViewResource(R.id.widget_bg_img, palette.bgRes)
+            views.setInt(
+                R.id.widget_bg_img, "setImageAlpha",
+                WidgetPrefs.getOpacity(context, appWidgetId) * 255 / 100
+            )
             views.setTextColor(R.id.widget_title, palette.heading)
             views.setTextColor(R.id.btn_settings, palette.accent)
             views.setTextColor(R.id.empty_view, palette.muted)
 
             views.setTextViewText(
                 R.id.widget_title,
-                notePath?.substringAfterLast('/')?.removeSuffix(".md") ?: "Obsidian Widget"
+                notePath?.substringAfterLast('/')?.removeSuffix(".md")
+                    ?: if (prefNote == WidgetPrefs.DAILY) "Daily note" else "Obsidian Widget"
             )
 
             val svcIntent = Intent(context, NoteWidgetService::class.java).apply {
@@ -57,7 +64,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
             )
 
             // ✏️ opens this note in the Obsidian app.
-            val vaultName = VaultRepository(context).vaultName
+            val vaultName = repo.vaultName
             if (vaultName != null && notePath != null) {
                 val deepLink = Intent(
                     Intent.ACTION_VIEW,

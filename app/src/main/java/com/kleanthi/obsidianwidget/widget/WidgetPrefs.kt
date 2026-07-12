@@ -1,8 +1,15 @@
 package com.kleanthi.obsidianwidget.widget
 
 import android.content.Context
+import com.kleanthi.obsidianwidget.vault.VaultRepository
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 object WidgetPrefs {
+    /** Note pref marker: widget follows today's daily note (YYYY-MM-DD.md). */
+    const val DAILY = "::daily::"
+
     private fun prefs(context: Context) =
         context.getSharedPreferences("widgets", Context.MODE_PRIVATE)
 
@@ -12,6 +19,27 @@ object WidgetPrefs {
     fun getNote(context: Context, appWidgetId: Int): String? =
         prefs(context).getString("note_$appWidgetId", null)
 
+    /**
+     * The actual path to render: the configured note, or today's daily note
+     * (file named YYYY-MM-DD.md anywhere in the vault). The daily lookup scans
+     * the vault at most once per day per widget; the result is cached here.
+     */
+    fun resolveNote(context: Context, appWidgetId: Int, repo: VaultRepository): String? {
+        val pref = getNote(context, appWidgetId) ?: return null
+        if (pref != DAILY) return pref
+        val today = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+        val p = prefs(context)
+        if (p.getString("daily_date_$appWidgetId", null) == today) {
+            p.getString("daily_path_$appWidgetId", null)?.let { return it }
+        }
+        val found = repo.listNotes()
+            .firstOrNull { it.relPath.substringAfterLast('/') == "$today.md" }
+            ?.relPath ?: return null
+        p.edit().putString("daily_path_$appWidgetId", found)
+            .putString("daily_date_$appWidgetId", today).apply()
+        return found
+    }
+
     fun setTheme(context: Context, appWidgetId: Int, mode: ThemeMode) =
         prefs(context).edit().putString("theme_$appWidgetId", mode.name).apply()
 
@@ -20,11 +48,36 @@ object WidgetPrefs {
             ?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() }
             ?: ThemeMode.SYSTEM
 
+    fun setOpacity(context: Context, appWidgetId: Int, percent: Int) =
+        prefs(context).edit().putInt("opacity_$appWidgetId", percent.coerceIn(10, 100)).apply()
+
+    fun getOpacity(context: Context, appWidgetId: Int): Int =
+        prefs(context).getInt("opacity_$appWidgetId", 100)
+
+    fun setFontSize(context: Context, appWidgetId: Int, size: FontSize) =
+        prefs(context).edit().putString("font_$appWidgetId", size.name).apply()
+
+    fun getFontSize(context: Context, appWidgetId: Int): FontSize =
+        prefs(context).getString("font_$appWidgetId", null)
+            ?.let { runCatching { FontSize.valueOf(it) }.getOrNull() }
+            ?: FontSize.MEDIUM
+
+    fun setHideDone(context: Context, appWidgetId: Int, hide: Boolean) =
+        prefs(context).edit().putBoolean("hidedone_$appWidgetId", hide).apply()
+
+    fun getHideDone(context: Context, appWidgetId: Int): Boolean =
+        prefs(context).getBoolean("hidedone_$appWidgetId", false)
+
     fun remove(context: Context, appWidgetId: Int) =
         prefs(context).edit()
             .remove("note_$appWidgetId")
             .remove("expanded_$appWidgetId")
             .remove("theme_$appWidgetId")
+            .remove("opacity_$appWidgetId")
+            .remove("font_$appWidgetId")
+            .remove("hidedone_$appWidgetId")
+            .remove("daily_date_$appWidgetId")
+            .remove("daily_path_$appWidgetId")
             .apply()
 
     // Fold state: tasks are folded by default; this stores the expanded ones,

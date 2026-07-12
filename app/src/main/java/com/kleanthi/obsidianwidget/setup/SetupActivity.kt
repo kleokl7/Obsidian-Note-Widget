@@ -73,8 +73,12 @@ class SetupActivity : AppCompatActivity() {
             return
         }
         for (id in ids) {
-            val note = WidgetPrefs.getNote(this, id)
-                ?.substringAfterLast('/')?.removeSuffix(".md") ?: "—"
+            val pref = WidgetPrefs.getNote(this, id)
+            val note = when {
+                pref == WidgetPrefs.DAILY -> "Daily note 📅"
+                pref != null -> pref.substringAfterLast('/').removeSuffix(".md")
+                else -> "—"
+            }
             val theme = WidgetPrefs.getTheme(this, id).name.lowercase()
                 .replaceFirstChar { it.uppercase() }
             container.addView(TextView(this).apply {

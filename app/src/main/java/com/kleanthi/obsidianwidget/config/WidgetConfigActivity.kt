@@ -4,13 +4,17 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.RadioGroup
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.kleanthi.obsidianwidget.R
 import com.kleanthi.obsidianwidget.vault.VaultRepository
+import com.kleanthi.obsidianwidget.widget.FontSize
 import com.kleanthi.obsidianwidget.widget.NoteWidgetProvider
 import com.kleanthi.obsidianwidget.widget.ThemeMode
 import com.kleanthi.obsidianwidget.widget.WidgetPrefs
@@ -42,16 +46,65 @@ class WidgetConfigActivity : AppCompatActivity() {
             }
         )
         themeGroup.setOnCheckedChangeListener { _, checkedId ->
-            val mode = when (checkedId) {
-                R.id.theme_light -> ThemeMode.LIGHT
-                R.id.theme_dark -> ThemeMode.DARK
-                else -> ThemeMode.SYSTEM
+            applyChange {
+                WidgetPrefs.setTheme(
+                    this, appWidgetId,
+                    when (checkedId) {
+                        R.id.theme_light -> ThemeMode.LIGHT
+                        R.id.theme_dark -> ThemeMode.DARK
+                        else -> ThemeMode.SYSTEM
+                    }
+                )
             }
-            WidgetPrefs.setTheme(this, appWidgetId, mode)
-            // Applies live when reconfiguring an existing widget.
-            if (WidgetPrefs.getNote(this, appWidgetId) != null) {
-                NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
+        }
+
+        val opacityLabel = findViewById<TextView>(R.id.opacity_label)
+        val opacitySeek = findViewById<SeekBar>(R.id.opacity_seek)
+        val opacity = WidgetPrefs.getOpacity(this, appWidgetId)
+        opacitySeek.progress = opacity
+        opacityLabel.text = getString(R.string.config_opacity_label, opacity)
+        opacitySeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(sb: SeekBar, value: Int, fromUser: Boolean) {
+                opacityLabel.text = getString(R.string.config_opacity_label, value)
             }
+            override fun onStartTrackingTouch(sb: SeekBar) {}
+            override fun onStopTrackingTouch(sb: SeekBar) {
+                applyChange { WidgetPrefs.setOpacity(this@WidgetConfigActivity, appWidgetId, sb.progress) }
+            }
+        })
+
+        val fontGroup = findViewById<RadioGroup>(R.id.font_group)
+        fontGroup.check(
+            when (WidgetPrefs.getFontSize(this, appWidgetId)) {
+                FontSize.SMALL -> R.id.font_small
+                FontSize.MEDIUM -> R.id.font_medium
+                FontSize.LARGE -> R.id.font_large
+            }
+        )
+        fontGroup.setOnCheckedChangeListener { _, checkedId ->
+            applyChange {
+                WidgetPrefs.setFontSize(
+                    this, appWidgetId,
+                    when (checkedId) {
+                        R.id.font_small -> FontSize.SMALL
+                        R.id.font_large -> FontSize.LARGE
+                        else -> FontSize.MEDIUM
+                    }
+                )
+            }
+        }
+
+        val hideDone = findViewById<CheckBox>(R.id.hide_done)
+        hideDone.isChecked = WidgetPrefs.getHideDone(this, appWidgetId)
+        hideDone.setOnCheckedChangeListener { _, checked ->
+            applyChange { WidgetPrefs.setHideDone(this, appWidgetId, checked) }
+        }
+
+        findViewById<TextView>(R.id.daily_button).setOnClickListener {
+            WidgetPrefs.setNote(this, appWidgetId, WidgetPrefs.DAILY)
+            NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
+            setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId))
+            finish()
         }
 
         val list = findViewById<ListView>(R.id.note_list)
@@ -74,6 +127,14 @@ class WidgetConfigActivity : AppCompatActivity() {
         thread {
             val notes = VaultRepository(this).listNotes()
             runOnUiThread { allNotes = notes; filter("") }
+        }
+    }
+
+    /** Persist a setting and re-render the widget if it's already showing a note. */
+    private fun applyChange(write: () -> Unit) {
+        write()
+        if (WidgetPrefs.getNote(this, appWidgetId) != null) {
+            NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
         }
     }
 

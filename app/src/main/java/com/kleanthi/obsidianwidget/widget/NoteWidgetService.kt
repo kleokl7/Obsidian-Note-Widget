@@ -6,6 +6,7 @@ import android.content.Intent
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.util.TypedValue
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.kleanthi.obsidianwidget.R
@@ -32,6 +33,8 @@ class NoteRemoteViewsFactory(
 
     private var rows: List<Row> = emptyList()
     private var palette: Palette = Themes.DARK
+    private var fontSize: FontSize = FontSize.MEDIUM
+    private var hideDone: Boolean = false
 
     private val childTypes = setOf(BlockType.TASK, BlockType.BULLET, BlockType.PARAGRAPH, BlockType.QUOTE)
 
@@ -39,8 +42,11 @@ class NoteRemoteViewsFactory(
 
     override fun onDataSetChanged() {
         palette = Themes.forWidget(context, appWidgetId)
-        val path = WidgetPrefs.getNote(context, appWidgetId)
-        val content = path?.let { VaultRepository(context).readNote(it) }
+        fontSize = WidgetPrefs.getFontSize(context, appWidgetId)
+        hideDone = WidgetPrefs.getHideDone(context, appWidgetId)
+        val repo = VaultRepository(context)
+        val path = WidgetPrefs.resolveNote(context, appWidgetId, repo)
+        val content = path?.let { repo.readNote(it) }
         val blocks = content?.let { MarkdownParser.parse(it) } ?: emptyList()
         rows = buildRows(blocks)
     }
@@ -54,6 +60,8 @@ class NoteRemoteViewsFactory(
             if (b.type == BlockType.TASK) {
                 var j = i + 1
                 while (j < blocks.size && blocks[j].type in childTypes && blocks[j].indent > b.indent) j++
+                // Hidden completed tasks take their indented children with them.
+                if (hideDone && (b.checked || b.state == '-')) { i = j; continue }
                 val kids = j - i - 1
                 val expanded = kids > 0 && WidgetPrefs.isExpanded(context, appWidgetId, b.text)
                 out.add(Row(b, kids > 0, expanded, kids))
@@ -86,6 +94,8 @@ class NoteRemoteViewsFactory(
             rv = RemoteViews(context.packageName, R.layout.row_task)
             rv.setTextViewText(R.id.task_checkbox, glyph(b.state))
             rv.setTextColor(R.id.task_checkbox, palette.accent)
+            rv.setTextViewTextSize(R.id.task_checkbox, TypedValue.COMPLEX_UNIT_SP, fontSize.glyph)
+            rv.setTextViewTextSize(R.id.task_text, TypedValue.COMPLEX_UNIT_SP, fontSize.body)
 
             val body = SpanMapper.toSpannable(InlineStyler.style(b.text), palette, strike = b.checked)
             val text: CharSequence = if (row.foldable) {
@@ -117,6 +127,7 @@ class NoteRemoteViewsFactory(
             rv = RemoteViews(context.packageName, R.layout.row_text)
             rv.setTextViewText(R.id.block_text, SpanMapper.render(b, palette))
             rv.setTextColor(R.id.block_text, palette.text)
+            rv.setTextViewTextSize(R.id.block_text, TypedValue.COMPLEX_UNIT_SP, fontSize.body)
             val pad = (3 * density).toInt()
             rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), pad, 0, pad)
             rv.setOnClickFillInIntent(R.id.block_text, Intent().apply {
