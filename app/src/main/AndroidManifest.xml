@@ -11,17 +11,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Own task: opening settings from a widget shouldn't resurface the app
-             task behind it (back/done should return to the home screen). -->
-        <activity
-            android:name=".config.WidgetConfigActivity"
-            android:exported="false"
-            android:excludeFromRecents="true"
-            android:taskAffinity="">
+        <!-- Launcher configure flow: must keep the default taskAffinity — in its
+             own task, setResult() never reaches the launcher and the widget is
+             removed with "Couldn't add widget". -->
+        <activity android:name=".config.WidgetConfigActivity" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+        <!-- Own task: opening settings from a widget shouldn't resurface the app
+             task behind it (back/done should return to the home screen). -->
+        <activity
+            android:name=".config.WidgetReconfigActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="" />
         <!-- Empty taskAffinity: launching with NEW_TASK must NOT bring the app's
              existing task to the foreground — the trampoline runs in its own
              invisible throwaway task. -->

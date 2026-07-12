@@ -20,7 +20,7 @@ import com.kleanthi.obsidianwidget.widget.ThemeMode
 import com.kleanthi.obsidianwidget.widget.WidgetPrefs
 import kotlin.concurrent.thread
 
-class WidgetConfigActivity : AppCompatActivity() {
+open class WidgetConfigActivity : AppCompatActivity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
     private var allNotes: List<VaultRepository.NoteRef> = emptyList()
     private var shown: List<VaultRepository.NoteRef> = emptyList()

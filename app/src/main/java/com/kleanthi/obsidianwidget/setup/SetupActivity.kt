@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.kleanthi.obsidianwidget.R
-import com.kleanthi.obsidianwidget.config.WidgetConfigActivity
+import com.kleanthi.obsidianwidget.config.WidgetReconfigActivity
 import com.kleanthi.obsidianwidget.vault.VaultRepository
 import com.kleanthi.obsidianwidget.widget.NoteWidgetProvider
 import com.kleanthi.obsidianwidget.widget.WidgetPrefs
@@ -97,7 +97,7 @@ class SetupActivity : AppCompatActivity() {
             row.findViewById<TextView>(R.id.widget_meta).text = meta
             val openConfig = android.view.View.OnClickListener {
                 startActivity(
-                    Intent(this@SetupActivity, WidgetConfigActivity::class.java)
+                    Intent(this@SetupActivity, WidgetReconfigActivity::class.java)
                         .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
                 )
             }

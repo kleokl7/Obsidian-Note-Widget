@@ -12,7 +12,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.RemoteViews
 import com.kleanthi.obsidianwidget.R
-import com.kleanthi.obsidianwidget.config.WidgetConfigActivity
+import com.kleanthi.obsidianwidget.config.WidgetReconfigActivity
 import com.kleanthi.obsidianwidget.core.BlockType
 import com.kleanthi.obsidianwidget.core.MarkdownParser
 import com.kleanthi.obsidianwidget.vault.VaultRepository
@@ -124,7 +124,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
             }
 
             // ⚙ opens widget settings (theme + note choice).
-            val settingsIntent = Intent(context, WidgetConfigActivity::class.java)
+            val settingsIntent = Intent(context, WidgetReconfigActivity::class.java)
                 .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
                 .setData(Uri.parse("obsidianwidget://config/$appWidgetId"))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

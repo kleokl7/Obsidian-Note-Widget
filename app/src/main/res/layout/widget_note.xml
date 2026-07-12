@@ -46,7 +46,9 @@
             android:textSize="15sp"
             android:textColor="@color/accent" />
 
-        <View
+        <!-- Spacer: must be a RemoteViews-allowed class — a plain <View> makes
+             the launcher fail to inflate the widget ("Couldn't add widget"). -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
