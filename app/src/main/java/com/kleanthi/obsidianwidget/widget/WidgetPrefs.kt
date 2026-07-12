@@ -13,5 +13,19 @@ object WidgetPrefs {
         prefs(context).getString("note_$appWidgetId", null)
 
     fun remove(context: Context, appWidgetId: Int) =
-        prefs(context).edit().remove("note_$appWidgetId").apply()
+        prefs(context).edit()
+            .remove("note_$appWidgetId")
+            .remove("expanded_$appWidgetId")
+            .apply()
+
+    // Fold state: tasks are folded by default; this stores the expanded ones,
+    // keyed by task text so the state survives line-number shifts.
+    fun isExpanded(context: Context, appWidgetId: Int, key: String): Boolean =
+        prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!.contains(key)
+
+    fun toggleExpanded(context: Context, appWidgetId: Int, key: String) {
+        val cur = HashSet(prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!)
+        if (!cur.add(key)) cur.remove(key)
+        prefs(context).edit().putStringSet("expanded_$appWidgetId", cur).apply()
+    }
 }

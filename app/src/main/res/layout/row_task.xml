@@ -10,8 +10,10 @@
         android:id="@+id/task_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="8dp"
-        android:textSize="16sp"
+        android:paddingStart="2dp"
+        android:paddingEnd="14dp"
+        android:paddingVertical="2dp"
+        android:textSize="17sp"
         android:textColor="@color/accent" />
 
     <TextView

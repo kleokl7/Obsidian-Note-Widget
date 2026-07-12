@@ -6,14 +6,17 @@ data class Block(
     val type: BlockType,
     val text: String,
     val level: Int = 0,
-    val checked: Boolean = false,
+    val state: Char = ' ',
     val indent: Int = 0,
     val sourceLine: Int
-)
+) {
+    val checked: Boolean get() = state == 'x' || state == 'X'
+}
 
 object MarkdownParser {
     private val headingRe = Regex("""^(#{1,6})\s+(.*)$""")
-    private val taskRe = Regex("""^(\s*)[-*+]\s+\[( |x|X)\]\s?(.*)$""")
+    // Any single state char: ' ', x, and Obsidian alternate states like / - > ?
+    private val taskRe = Regex("""^(\s*)[-*+]\s+\[(.)\]\s?(.*)$""")
     private val bulletRe = Regex("""^(\s*)[-*+]\s+(.*)$""")
     private val quoteRe = Regex("""^>\s?(.*)$""")
 
@@ -54,7 +57,7 @@ object MarkdownParser {
                 taskRe.matches(line) -> {
                     val m = taskRe.find(line)!!
                     blocks.add(Block(BlockType.TASK, m.groupValues[3],
-                        checked = m.groupValues[2].equals("x", ignoreCase = true),
+                        state = m.groupValues[2][0],
                         indent = m.groupValues[1].length / 2, sourceLine = i))
                 }
                 line.trim() == "---" || line.trim() == "***" || line.trim() == "___" ->
@@ -68,7 +71,8 @@ object MarkdownParser {
                     val m = quoteRe.find(line)!!
                     blocks.add(Block(BlockType.QUOTE, m.groupValues[1], sourceLine = i))
                 }
-                else -> blocks.add(Block(BlockType.PARAGRAPH, line.trim(), sourceLine = i))
+                else -> blocks.add(Block(BlockType.PARAGRAPH, line.trim(),
+                    indent = (line.length - line.trimStart().length) / 2, sourceLine = i))
             }
             i++
         }

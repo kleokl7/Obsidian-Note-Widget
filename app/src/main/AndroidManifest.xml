@@ -17,6 +17,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".widget.WidgetActionActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
             android:name=".editor.EditorActivity"
             android:exported="false"
             android:excludeFromRecents="true"

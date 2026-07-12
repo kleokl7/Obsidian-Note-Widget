@@ -72,4 +72,25 @@ class MarkdownParserTest {
         assertEquals(BlockType.TASK, b[0].type)
         assertEquals(BlockType.BULLET, b[1].type)
     }
+
+    @Test fun `alternate task states parse with state char`() {
+        val b = MarkdownParser.parse("- [/] in progress\n- [-] cancelled\n- [>] forwarded")
+        assertEquals(listOf(BlockType.TASK, BlockType.TASK, BlockType.TASK), b.map { it.type })
+        assertEquals('/', b[0].state)
+        assertEquals(false, b[0].checked)
+        assertEquals('-', b[1].state)
+        assertEquals('>', b[2].state)
+    }
+
+    @Test fun `double-bracket wikilink bullet is not a task`() {
+        val b = MarkdownParser.parse("- [[Some Note]]")
+        assertEquals(BlockType.BULLET, b[0].type)
+    }
+
+    @Test fun `indented paragraph records indent for folding`() {
+        val b = MarkdownParser.parse("- [ ] task\n  some detail text")
+        assertEquals(BlockType.PARAGRAPH, b[1].type)
+        assertEquals(1, b[1].indent)
+        assertEquals("some detail text", b[1].text)
+    }
 }

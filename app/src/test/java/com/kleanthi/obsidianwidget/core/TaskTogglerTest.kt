@@ -45,6 +45,13 @@ class TaskTogglerTest {
         assertEquals("# t\r\n- [x] win file\r\n", r.newContent)
     }
 
+    @Test fun `alternate state completes to x`() {
+        val r = TaskToggler.toggle("- [/] half done", 0, "half done")
+        r as ToggleResult.Success
+        assertEquals("- [x] half done", r.newContent)
+        assertEquals(true, r.nowChecked)
+    }
+
     @Test fun `unicode task text round trips`() {
         val r = TaskToggler.toggle("- [ ] καφές ☕", 0, "καφές ☕")
         r as ToggleResult.Success
