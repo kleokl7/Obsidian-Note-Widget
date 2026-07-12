@@ -23,7 +23,10 @@ time Obsidian runs.
   device theme; after a device theme flip it catches up on the next refresh
   (interaction, opening the app, or the 15-min cycle).
 - ✏️ opens the note in the Obsidian app. ⚙ opens the widget's settings.
-  Tapping a plain text row opens the popup editor (raw markdown).
+  Tapping a heading collapses/expands its section; headings show an
+  open-task count for their section. Tapping a plain text row opens the
+  popup viewer — rendered markdown with tappable checkboxes, and an Edit
+  button for raw-markdown editing.
 - Per-widget settings: theme, background opacity, text size, hide
   completed tasks, and the displayed note — including "Show today's
   daily note", which follows the file named `YYYY-MM-DD.md` anywhere

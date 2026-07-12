@@ -75,23 +75,35 @@ class SetupActivity : AppCompatActivity() {
         for (id in ids) {
             val pref = WidgetPrefs.getNote(this, id)
             val note = when {
-                pref == WidgetPrefs.DAILY -> "Daily note 📅"
+                pref == WidgetPrefs.DAILY -> "📅 Daily note"
                 pref != null -> pref.substringAfterLast('/').removeSuffix(".md")
-                else -> "—"
+                else -> "Not configured"
             }
-            val theme = WidgetPrefs.getTheme(this, id).name.lowercase()
-                .replaceFirstChar { it.uppercase() }
-            container.addView(TextView(this).apply {
-                text = getString(R.string.setup_widget_row, note, theme)
-                textSize = 15f
-                setPadding(0, 24, 0, 24)
-                setOnClickListener {
-                    startActivity(
-                        Intent(this@SetupActivity, WidgetConfigActivity::class.java)
-                            .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
-                    )
+            val meta = buildList {
+                add(WidgetPrefs.getTheme(this@SetupActivity, id).name.lowercase()
+                    .replaceFirstChar { it.uppercase() } + " theme")
+                val opacity = WidgetPrefs.getOpacity(this@SetupActivity, id)
+                if (opacity < 100) add("$opacity%")
+                when (WidgetPrefs.getFontSize(this@SetupActivity, id)) {
+                    com.kleanthi.obsidianwidget.widget.FontSize.SMALL -> add("Small text")
+                    com.kleanthi.obsidianwidget.widget.FontSize.LARGE -> add("Large text")
+                    else -> {}
                 }
-            })
+                if (WidgetPrefs.getHideDone(this@SetupActivity, id)) add("Hides done")
+            }.joinToString("  ·  ")
+
+            val row = layoutInflater.inflate(R.layout.item_widget, container, false)
+            row.findViewById<TextView>(R.id.widget_note_name).text = note
+            row.findViewById<TextView>(R.id.widget_meta).text = meta
+            val openConfig = android.view.View.OnClickListener {
+                startActivity(
+                    Intent(this@SetupActivity, WidgetConfigActivity::class.java)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id)
+                )
+            }
+            row.setOnClickListener(openConfig)
+            row.findViewById<Button>(R.id.widget_edit_btn).setOnClickListener(openConfig)
+            container.addView(row)
         }
     }
 

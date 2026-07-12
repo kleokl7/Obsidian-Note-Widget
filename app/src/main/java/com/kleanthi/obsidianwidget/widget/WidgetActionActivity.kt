@@ -44,6 +44,12 @@ class WidgetActionActivity : Activity() {
                 AppWidgetManager.getInstance(this)
                     .notifyAppWidgetViewDataChanged(widgetId, R.id.block_list)
             }
+            NoteWidgetProvider.ACT_FOLD_HEAD -> {
+                val key = intent.getStringExtra(NoteWidgetProvider.EXTRA_EXPECTED)
+                if (key != null) WidgetPrefs.toggleHeadingCollapsed(this, widgetId, key)
+                AppWidgetManager.getInstance(this)
+                    .notifyAppWidgetViewDataChanged(widgetId, R.id.block_list)
+            }
             NoteWidgetProvider.ACT_EDIT -> {
                 startActivity(
                     Intent(this, EditorActivity::class.java)

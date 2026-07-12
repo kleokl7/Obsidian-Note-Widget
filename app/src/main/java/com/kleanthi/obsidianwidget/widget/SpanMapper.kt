@@ -18,6 +18,15 @@ import com.kleanthi.obsidianwidget.core.InlineStyler
 import com.kleanthi.obsidianwidget.core.StyledText
 
 object SpanMapper {
+    fun taskGlyph(state: Char): String = when (state) {
+        ' ' -> "☐"
+        'x', 'X' -> "☑"
+        '/' -> "◧"          // in progress
+        '-' -> "⊟"          // cancelled
+        '>' -> "➤"          // forwarded/scheduled
+        else -> "[$state]"  // any other custom state, shown as-is
+    }
+
     fun toSpannable(styled: StyledText, palette: Palette, strike: Boolean = false): SpannableString {
         val s = SpannableString(styled.text)
         for (span in styled.spans) {

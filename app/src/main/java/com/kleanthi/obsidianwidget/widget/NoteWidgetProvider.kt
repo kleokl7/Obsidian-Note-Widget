@@ -20,6 +20,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
         const val EXTRA_EXPECTED = "expected"
         const val ACT_TOGGLE = "toggle"
         const val ACT_FOLD = "fold"
+        const val ACT_FOLD_HEAD = "fold_head"
         const val ACT_EDIT = "edit"
 
         fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {

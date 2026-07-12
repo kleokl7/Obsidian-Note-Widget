@@ -72,6 +72,7 @@ object WidgetPrefs {
         prefs(context).edit()
             .remove("note_$appWidgetId")
             .remove("expanded_$appWidgetId")
+            .remove("collapsedheads_$appWidgetId")
             .remove("theme_$appWidgetId")
             .remove("opacity_$appWidgetId")
             .remove("font_$appWidgetId")
@@ -89,5 +90,17 @@ object WidgetPrefs {
         val cur = HashSet(prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!)
         if (!cur.add(key)) cur.remove(key)
         prefs(context).edit().putStringSet("expanded_$appWidgetId", cur).apply()
+    }
+
+    // Heading fold state: headings are expanded by default; this stores the
+    // collapsed ones. Keys carry an occurrence index ("Today#1") because the
+    // same heading text often repeats within a note.
+    fun isHeadingCollapsed(context: Context, appWidgetId: Int, key: String): Boolean =
+        prefs(context).getStringSet("collapsedheads_$appWidgetId", emptySet())!!.contains(key)
+
+    fun toggleHeadingCollapsed(context: Context, appWidgetId: Int, key: String) {
+        val cur = HashSet(prefs(context).getStringSet("collapsedheads_$appWidgetId", emptySet())!!)
+        if (!cur.add(key)) cur.remove(key)
+        prefs(context).edit().putStringSet("collapsedheads_$appWidgetId", cur).apply()
     }
 }

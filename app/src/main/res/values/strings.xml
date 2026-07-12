@@ -6,8 +6,8 @@
     <string name="config_search_hint">Search notes…</string>
     <string name="setup_widgets_header">Active widgets: %1$d</string>
     <string name="setup_no_widgets">None yet — place one from the home screen.</string>
-    <string name="setup_widget_row">%1$s  ·  %2$s</string>
     <string name="setup_refresh">Refresh all widgets</string>
+    <string name="setup_edit">Edit</string>
     <string name="setup_refreshed">Widgets refreshed</string>
     <string name="config_theme_label">Widget theme</string>
     <string name="config_theme_system">System</string>
@@ -25,6 +25,8 @@
     <string name="widget_empty">No note selected or note unreadable.\nTap to open the app.</string>
     <string name="editor_save">Save</string>
     <string name="editor_cancel">Cancel</string>
+    <string name="editor_edit">Edit</string>
+    <string name="editor_close">Close</string>
     <string name="editor_conflict_title">Note changed on disk</string>
     <string name="editor_conflict_msg">This note was modified (probably by sync) while you were editing. Overwrite with your version, or reload the new one and lose your edits?</string>
     <string name="editor_overwrite">Overwrite</string>
