@@ -16,6 +16,12 @@ time Obsidian runs.
 - The vault must be in shared storage (a folder a file manager can see),
   not Obsidian's private app storage.
 - Task checkboxes toggle `- [ ]`/`- [x]` in the file immediately.
+- Each widget has a System / Light / Dark theme setting (warm paper light,
+  warm charcoal dark — the [Claude Code Obsidian Theme](https://github.com/kleokl7/Claude-Code-Obsidian-Theme)
+  palette). Pick it when adding the widget, or long-press the widget →
+  edit/settings to change it later. In System mode the widget follows the
+  device theme; after a device theme flip it catches up on the next refresh
+  (interaction, opening the app, or the 15-min cycle).
 - ✏️ opens the popup editor (raw markdown). ◆ opens the note in Obsidian.
 - Widget refreshes on interaction, when the app opens, and every 15 min.
 

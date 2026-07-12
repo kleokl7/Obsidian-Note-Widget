@@ -31,12 +31,14 @@ class NoteRemoteViewsFactory(
     private data class Row(val block: Block, val foldable: Boolean, val expanded: Boolean, val hidden: Int)
 
     private var rows: List<Row> = emptyList()
+    private var palette: Palette = Themes.DARK
 
     private val childTypes = setOf(BlockType.TASK, BlockType.BULLET, BlockType.PARAGRAPH, BlockType.QUOTE)
 
     override fun onCreate() {}
 
     override fun onDataSetChanged() {
+        palette = Themes.forWidget(context, appWidgetId)
         val path = WidgetPrefs.getNote(context, appWidgetId)
         val content = path?.let { VaultRepository(context).readNote(it) }
         val blocks = content?.let { MarkdownParser.parse(it) } ?: emptyList()
@@ -83,16 +85,18 @@ class NoteRemoteViewsFactory(
         if (b.type == BlockType.TASK) {
             rv = RemoteViews(context.packageName, R.layout.row_task)
             rv.setTextViewText(R.id.task_checkbox, glyph(b.state))
+            rv.setTextColor(R.id.task_checkbox, palette.accent)
 
-            val body = SpanMapper.toSpannable(InlineStyler.style(b.text), strike = b.checked)
+            val body = SpanMapper.toSpannable(InlineStyler.style(b.text), palette, strike = b.checked)
             val text: CharSequence = if (row.foldable) {
                 val suffix = if (row.expanded) "  ▾" else "  ▸${row.hidden}"
                 SpannableStringBuilder(body).append(suffix).apply {
-                    setSpan(ForegroundColorSpan(0xFF888888.toInt()),
+                    setSpan(ForegroundColorSpan(palette.faint),
                         length - suffix.length, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
             } else body
             rv.setTextViewText(R.id.task_text, text)
+            rv.setTextColor(R.id.task_text, if (b.checked) palette.muted else palette.text)
             // setViewPadding sets all four sides — keep the XML's 4dp vertical padding.
             val pad = (4 * density).toInt()
             rv.setViewPadding(R.id.task_row, (b.indent * 16 * density).toInt(), pad, 0, pad)
@@ -111,7 +115,8 @@ class NoteRemoteViewsFactory(
             })
         } else {
             rv = RemoteViews(context.packageName, R.layout.row_text)
-            rv.setTextViewText(R.id.block_text, SpanMapper.render(b))
+            rv.setTextViewText(R.id.block_text, SpanMapper.render(b, palette))
+            rv.setTextColor(R.id.block_text, palette.text)
             val pad = (3 * density).toInt()
             rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), pad, 0, pad)
             rv.setOnClickFillInIntent(R.id.block_text, Intent().apply {

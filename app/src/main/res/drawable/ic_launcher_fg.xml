@@ -1,6 +1,38 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#8B7EC8"
-        android:pathData="M54,26 L74,48 L60,82 L46,82 L34,50 Z" />
+
+    <!-- Knapped obsidian arrowhead: glassy black stone, chipped edges, notched tang -->
+
+    <!-- Silhouette / right face (darkest) -->
+    <path android:fillColor="#101109"
+        android:pathData="M54,21 L61,32 L59.5,35 L66.5,46 L65,50 L71,61 L69.5,64 L73.5,72
+            L66,69 L62,76 L54,70 L46,76 L42,69 L34.5,72
+            L38.5,64 L36.5,60 L43,49 L41.5,45 L47.5,34 L49,31 Z" />
+
+    <!-- Left face (catches the light) -->
+    <path android:fillColor="#22241D"
+        android:pathData="M54,21 L49,31 L47.5,34 L41.5,45 L43,49 L36.5,60 L38.5,64 L34.5,72
+            L42,69 L46,76 L54,70 L52,52 L50,36 Z" />
+
+    <!-- Central ridge facet -->
+    <path android:fillColor="#2C2E26"
+        android:pathData="M54,21 L57.5,36 L56,54 L54,70 L52,54 L50,36 Z" />
+
+    <!-- Chip facets along the edges -->
+    <path android:fillColor="#2A2C24" android:pathData="M66.5,46 L65,50 L60,47.5 Z" />
+    <path android:fillColor="#2E3028" android:pathData="M43,49 L41.5,45 L46,47 Z" />
+    <path android:fillColor="#1E2019" android:pathData="M71,61 L69.5,64 L64.5,61 Z" />
+
+    <!-- Glass sheen streaks -->
+    <path android:fillColor="#38F6F4EE" android:pathData="M49.5,32 L53.5,30 L46,55 L42.5,57 Z" />
+    <path android:fillColor="#21F6F4EE" android:pathData="M57,42 L60,41 L55.5,62 L52.5,63 Z" />
+
+    <!-- Bright knap highlights -->
+    <path android:fillColor="#73F6F4EE" android:pathData="M54,21 L56,26 L52.5,25 Z" />
+    <path android:fillColor="#80F6F4EE" android:pathData="M61,32 L59.5,35 L57.5,32.5 Z" />
+
+    <!-- Coral edge glints (theme accent) -->
+    <path android:fillColor="#8CD97757" android:pathData="M42,69 L46,76 L45,71 Z" />
+    <path android:fillColor="#80D97757" android:pathData="M69.5,64 L71.5,68 L68,66 Z" />
 </vector>

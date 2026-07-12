@@ -8,4 +8,5 @@
     android:widgetCategory="home_screen"
     android:initialLayout="@layout/widget_note"
     android:configure="com.kleanthi.obsidianwidget.config.WidgetConfigActivity"
+    android:widgetFeatures="reconfigurable"
     android:updatePeriodMillis="1800000" />

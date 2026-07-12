@@ -1,9 +1,12 @@
 package com.kleanthi.obsidianwidget.editor
 
 import android.appwidget.AppWidgetManager
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kleanthi.obsidianwidget.R
 import com.kleanthi.obsidianwidget.vault.VaultRepository
 import com.kleanthi.obsidianwidget.widget.NoteWidgetProvider
+import com.kleanthi.obsidianwidget.widget.Themes
 import com.kleanthi.obsidianwidget.widget.WidgetPrefs
 
 class EditorActivity : AppCompatActivity() {
@@ -45,6 +49,29 @@ class EditorActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_cancel).setOnClickListener { finish() }
         findViewById<Button>(R.id.btn_save).setOnClickListener { trySave() }
+        applyTheme()
+    }
+
+    /** Match the popup to the theme of the widget it was opened from. */
+    private fun applyTheme() {
+        val p = Themes.forWidget(this, widgetId)
+        val bg = GradientDrawable().apply {
+            cornerRadius = 20 * resources.displayMetrics.density
+            setColor(p.bg)
+        }
+        findViewById<LinearLayout>(R.id.editor_root).background = bg
+        window.setBackgroundDrawable(GradientDrawable().apply { setColor(0) })
+
+        val title = findViewById<TextView>(R.id.editor_title)
+        title.setTextColor(p.heading)
+        editor.setTextColor(p.text)
+        editor.setHintTextColor(p.faint)
+
+        findViewById<Button>(R.id.btn_cancel).setTextColor(p.muted)
+        findViewById<Button>(R.id.btn_save).apply {
+            backgroundTintList = ColorStateList.valueOf(p.accent)
+            setTextColor(p.onAccent)
+        }
     }
 
     private fun trySave() {

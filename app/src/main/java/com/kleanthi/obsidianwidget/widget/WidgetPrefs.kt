@@ -12,10 +12,19 @@ object WidgetPrefs {
     fun getNote(context: Context, appWidgetId: Int): String? =
         prefs(context).getString("note_$appWidgetId", null)
 
+    fun setTheme(context: Context, appWidgetId: Int, mode: ThemeMode) =
+        prefs(context).edit().putString("theme_$appWidgetId", mode.name).apply()
+
+    fun getTheme(context: Context, appWidgetId: Int): ThemeMode =
+        prefs(context).getString("theme_$appWidgetId", null)
+            ?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() }
+            ?: ThemeMode.SYSTEM
+
     fun remove(context: Context, appWidgetId: Int) =
         prefs(context).edit()
             .remove("note_$appWidgetId")
             .remove("expanded_$appWidgetId")
+            .remove("theme_$appWidgetId")
             .apply()
 
     // Fold state: tasks are folded by default; this stores the expanded ones,

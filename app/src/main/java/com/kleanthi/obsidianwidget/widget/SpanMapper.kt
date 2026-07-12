@@ -18,23 +18,23 @@ import com.kleanthi.obsidianwidget.core.InlineStyler
 import com.kleanthi.obsidianwidget.core.StyledText
 
 object SpanMapper {
-    private const val LINK_COLOR = 0xFF8B7EC8.toInt()
-    private const val HIGHLIGHT_BG = 0x59FFD54F // translucent amber
-    private const val QUOTE_COLOR = 0xFF9E9E9E.toInt()
-
-    fun toSpannable(styled: StyledText, strike: Boolean = false): SpannableString {
+    fun toSpannable(styled: StyledText, palette: Palette, strike: Boolean = false): SpannableString {
         val s = SpannableString(styled.text)
         for (span in styled.spans) {
             if (span.start >= span.end) continue
-            val what: Any = when (span.style) {
-                InlineStyle.BOLD -> StyleSpan(Typeface.BOLD)
-                InlineStyle.ITALIC -> StyleSpan(Typeface.ITALIC)
-                InlineStyle.HIGHLIGHT -> BackgroundColorSpan(HIGHLIGHT_BG)
-                InlineStyle.CODE -> TypefaceSpan("monospace")
-                InlineStyle.STRIKE -> StrikethroughSpan()
-                InlineStyle.LINK -> ForegroundColorSpan(LINK_COLOR)
+            val whats: List<Any> = when (span.style) {
+                InlineStyle.BOLD -> listOf(StyleSpan(Typeface.BOLD))
+                InlineStyle.ITALIC -> listOf(StyleSpan(Typeface.ITALIC))
+                InlineStyle.HIGHLIGHT -> listOf(BackgroundColorSpan(palette.highlightBg))
+                InlineStyle.CODE -> listOf(
+                    TypefaceSpan("monospace"),
+                    BackgroundColorSpan(palette.codeBg),
+                    ForegroundColorSpan(palette.codeText),
+                )
+                InlineStyle.STRIKE -> listOf(StrikethroughSpan())
+                InlineStyle.LINK -> listOf(ForegroundColorSpan(palette.link))
             }
-            s.setSpan(what, span.start, span.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            for (what in whats) s.setSpan(what, span.start, span.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         if (strike && s.isNotEmpty()) {
             s.setSpan(StrikethroughSpan(), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -42,31 +42,37 @@ object SpanMapper {
         return s
     }
 
-    fun render(block: Block): CharSequence = when (block.type) {
+    fun render(block: Block, palette: Palette): CharSequence = when (block.type) {
         BlockType.HEADING -> {
-            val s = toSpannable(InlineStyler.style(block.text))
+            val s = toSpannable(InlineStyler.style(block.text), palette)
             val size = when (block.level) { 1 -> 1.5f; 2 -> 1.3f; 3 -> 1.15f; else -> 1.05f }
             if (s.isNotEmpty()) {
                 s.setSpan(RelativeSizeSpan(size), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 s.setSpan(StyleSpan(Typeface.BOLD), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                s.setSpan(ForegroundColorSpan(palette.heading), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             s
         }
         BlockType.BULLET ->
             SpannableStringBuilder("    ".repeat(block.indent) + "•  ")
-                .append(toSpannable(InlineStyler.style(block.text)))
+                .append(toSpannable(InlineStyler.style(block.text), palette))
         BlockType.QUOTE -> {
-            val b = SpannableStringBuilder("▎ ").append(toSpannable(InlineStyler.style(block.text)))
-            b.setSpan(ForegroundColorSpan(QUOTE_COLOR), 0, b.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            val b = SpannableStringBuilder("▎ ").append(toSpannable(InlineStyler.style(block.text), palette))
+            b.setSpan(ForegroundColorSpan(palette.muted), 0, b.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             b.setSpan(StyleSpan(Typeface.ITALIC), 0, b.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             b
         }
         BlockType.CODE -> {
             val s = SpannableString(block.text)
-            if (s.isNotEmpty()) s.setSpan(TypefaceSpan("monospace"), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            if (s.isNotEmpty()) {
+                s.setSpan(TypefaceSpan("monospace"), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                s.setSpan(ForegroundColorSpan(palette.codeText), 0, s.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
             s
         }
-        BlockType.RULE -> "──────────"
-        BlockType.TASK, BlockType.PARAGRAPH -> toSpannable(InlineStyler.style(block.text))
+        BlockType.RULE -> SpannableString("──────────").apply {
+            setSpan(ForegroundColorSpan(palette.faint), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        BlockType.TASK, BlockType.PARAGRAPH -> toSpannable(InlineStyler.style(block.text), palette)
     }
 }

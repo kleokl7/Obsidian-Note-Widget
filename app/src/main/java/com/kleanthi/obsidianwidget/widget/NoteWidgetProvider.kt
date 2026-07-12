@@ -26,6 +26,12 @@ class NoteWidgetProvider : AppWidgetProvider() {
             val notePath = WidgetPrefs.getNote(context, appWidgetId)
             val views = RemoteViews(context.packageName, R.layout.widget_note)
 
+            val palette = Themes.forWidget(context, appWidgetId)
+            views.setInt(R.id.widget_root, "setBackgroundResource", palette.bgRes)
+            views.setTextColor(R.id.widget_title, palette.heading)
+            views.setTextColor(R.id.btn_obsidian, palette.accent)
+            views.setTextColor(R.id.empty_view, palette.muted)
+
             views.setTextViewText(
                 R.id.widget_title,
                 notePath?.substringAfterLast('/')?.removeSuffix(".md") ?: "Obsidian Widget"

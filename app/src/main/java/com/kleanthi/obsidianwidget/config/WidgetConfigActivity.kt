@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import com.kleanthi.obsidianwidget.R
 import com.kleanthi.obsidianwidget.vault.VaultRepository
+import com.kleanthi.obsidianwidget.widget.NoteWidgetProvider
+import com.kleanthi.obsidianwidget.widget.ThemeMode
 import com.kleanthi.obsidianwidget.widget.WidgetPrefs
 import kotlin.concurrent.thread
 
@@ -29,6 +32,28 @@ class WidgetConfigActivity : AppCompatActivity() {
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) { finish(); return }
 
         setContentView(R.layout.activity_config)
+
+        val themeGroup = findViewById<RadioGroup>(R.id.theme_group)
+        themeGroup.check(
+            when (WidgetPrefs.getTheme(this, appWidgetId)) {
+                ThemeMode.SYSTEM -> R.id.theme_system
+                ThemeMode.LIGHT -> R.id.theme_light
+                ThemeMode.DARK -> R.id.theme_dark
+            }
+        )
+        themeGroup.setOnCheckedChangeListener { _, checkedId ->
+            val mode = when (checkedId) {
+                R.id.theme_light -> ThemeMode.LIGHT
+                R.id.theme_dark -> ThemeMode.DARK
+                else -> ThemeMode.SYSTEM
+            }
+            WidgetPrefs.setTheme(this, appWidgetId, mode)
+            // Applies live when reconfiguring an existing widget.
+            if (WidgetPrefs.getNote(this, appWidgetId) != null) {
+                NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
+            }
+        }
+
         val list = findViewById<ListView>(R.id.note_list)
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mutableListOf())
         list.adapter = adapter
