@@ -6,8 +6,9 @@ reading/writing vault files directly; Obsidian Sync picks changes up next
 time Obsidian runs.
 
 ## Install
-1. Copy `app-release.apk` to the phone (Drive, cable, …) and tap it.
-   Allow "install unknown apps" for your file manager when prompted.
+1. Download the APK from the [Releases](../../releases) page onto your phone
+   and tap it. Allow "install unknown apps" for your file manager when
+   prompted.
 2. Open **Obsidian Widget** → *Choose vault folder* → pick your vault.
 3. Long-press the home screen → Widgets → Obsidian Widget → pick a note.
 
@@ -19,7 +20,25 @@ time Obsidian runs.
 - Widget refreshes on interaction, when the app opens, and every 15 min.
 
 ## Build
-`./gradlew assembleRelease` — needs Android SDK 34 (`local.properties`)
-and `keystore.properties` + `release.keystore` (local-only personal
-signing key; regenerate with `keytool -genkeypair` if lost, then
-uninstall/reinstall on the phone).
+Needs Android SDK 34 (point `local.properties` at it, or set `ANDROID_HOME`).
+
+- `./gradlew assembleDebug` — works out of the box, signed with the debug key.
+- `./gradlew assembleRelease` — needs your own signing key. Generate one with
+  `keytool -genkeypair -keystore release.keystore -alias <alias>` and create a
+  `keystore.properties` in the project root (both are git-ignored):
+
+  ```properties
+  storeFile=release.keystore
+  storePassword=...
+  keyAlias=...
+  keyPassword=...
+  ```
+
+  Note: releases signed with a different key can't upgrade an existing
+  install — uninstall/reinstall on the phone.
+
+## License
+[MIT](LICENSE)
+
+This is an unofficial community project, not affiliated with or endorsed by
+Obsidian.
