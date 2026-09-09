@@ -7,13 +7,17 @@
     android:baselineAligned="false"
     android:paddingVertical="4dp">
 
+    <!-- Glyph column is a generous tap target; its width stays fixed so task
+         text lines up whatever the checkbox state. -->
     <TextView
         android:id="@+id/task_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="34dp"
+        android:minHeight="28dp"
+        android:gravity="start|center_vertical"
         android:paddingStart="2dp"
-        android:paddingEnd="14dp"
-        android:paddingVertical="2dp"
+        android:paddingEnd="8dp"
         android:textSize="17sp"
         android:textColor="@color/accent" />
 
@@ -21,6 +25,8 @@
         android:id="@+id/task_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="28dp"
+        android:gravity="center_vertical"
         android:textSize="14sp"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textColor="@color/ink" />
 </LinearLayout>

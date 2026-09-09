@@ -1,0 +1,4 @@
+<resources>
+    <!-- Horizontal page margin; grows with window width so settings stay a readable column on tablets. -->
+    <dimen name="page_margin">20dp</dimen>
+</resources>

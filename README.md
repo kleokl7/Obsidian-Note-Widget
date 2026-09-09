@@ -22,8 +22,8 @@ time Obsidian runs.
 - **Theming** — warm paper light mode and warm charcoal dark mode (the
   [Claude Code Obsidian Theme](https://github.com/kleokl7/Claude-Code-Obsidian-Theme)
   palette), following the device or forced per widget.
-- ✏️ deep-links into the note in the Obsidian app; ⚙ opens the widget's
-  settings.
+- ✎ deep-links into the note in the Obsidian app; ⚙ opens the widget's
+  settings. The app screens use the same paper/charcoal palette.
 
 ## Install
 
@@ -40,7 +40,7 @@ Android).
 ## Per-widget settings
 
 Open with the widget's ⚙ button, or from the app's widget list (one card
-per active widget). Each widget independently has:
+per active widget, each with a Settings button). Each widget independently has:
 
 - Theme: System / Light / Dark
 - Background opacity (fades the card, not the text)

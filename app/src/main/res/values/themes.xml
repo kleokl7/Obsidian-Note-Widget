@@ -1,6 +1,50 @@
 <resources>
-    <style name="Theme.ObsidianWidget" parent="Theme.Material3.DayNight.NoActionBar" />
+    <!-- The app wears the same paper/charcoal as the widgets. Colors flip via
+         values-night/colors.xml, so one theme definition covers both modes. -->
+    <style name="Theme.ObsidianWidget" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/on_accent</item>
+        <item name="colorPrimaryContainer">@color/paper_card</item>
+        <item name="colorOnPrimaryContainer">@color/ink_heading</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/on_accent</item>
+        <item name="colorSecondaryContainer">@color/paper_card</item>
+        <item name="colorOnSecondaryContainer">@color/ink_heading</item>
+        <item name="android:colorBackground">@color/paper</item>
+        <item name="colorOnBackground">@color/ink</item>
+        <item name="colorSurface">@color/paper</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="colorSurfaceVariant">@color/paper_card</item>
+        <item name="colorOnSurfaceVariant">@color/ink_muted</item>
+        <item name="colorSurfaceContainer">@color/paper_card</item>
+        <item name="colorSurfaceContainerHigh">@color/paper_card</item>
+        <item name="colorSurfaceContainerLow">@color/paper</item>
+        <item name="colorOutline">@color/ink_faint</item>
+        <item name="colorOutlineVariant">@color/paper_stroke</item>
+        <item name="android:textColorPrimary">@color/ink</item>
+        <item name="android:textColorSecondary">@color/ink_muted</item>
+        <item name="android:textColorHint">@color/ink_faint</item>
+        <item name="android:statusBarColor">@color/paper</item>
+        <item name="android:navigationBarColor">@color/paper</item>
+        <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
+    </style>
     <style name="Theme.ObsidianWidget.Dialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/on_accent</item>
+        <item name="colorSurface">@color/paper</item>
+        <item name="colorOnSurface">@color/ink</item>
+        <item name="colorOnSurfaceVariant">@color/ink_muted</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- Section label inside settings screens: the same weight as a widget title. -->
+    <style name="TextAppearance.ObsidianWidget.Section" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textColor">@color/ink_heading</item>
+    </style>
+    <style name="TextAppearance.ObsidianWidget.ScreenTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@color/ink_heading</item>
     </style>
 </resources>

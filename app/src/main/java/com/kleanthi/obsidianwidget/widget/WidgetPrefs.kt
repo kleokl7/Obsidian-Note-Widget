@@ -27,7 +27,7 @@ object WidgetPrefs {
     fun resolveNote(context: Context, appWidgetId: Int, repo: VaultRepository): String? {
         val pref = getNote(context, appWidgetId) ?: return null
         if (pref != DAILY) return pref
-        val today = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+        val today = todayName()
         val p = prefs(context)
         if (p.getString("daily_date_$appWidgetId", null) == today) {
             p.getString("daily_path_$appWidgetId", null)?.let { return it }
@@ -39,6 +39,9 @@ object WidgetPrefs {
             .putString("daily_date_$appWidgetId", today).apply()
         return found
     }
+
+    /** Today's daily-note file name without the extension (YYYY-MM-DD). */
+    fun todayName(): String = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
 
     fun setTheme(context: Context, appWidgetId: Int, mode: ThemeMode) =
         prefs(context).edit().putString("theme_$appWidgetId", mode.name).apply()

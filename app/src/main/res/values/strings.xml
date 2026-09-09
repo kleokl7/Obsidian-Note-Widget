@@ -1,15 +1,36 @@
 <resources>
     <string name="app_name">Obsidian Widget</string>
-    <string name="setup_no_vault">No vault connected yet.\n\nPick your Obsidian vault folder to get started.</string>
+
+    <!-- Setup screen -->
+    <string name="setup_no_vault">No vault connected yet.</string>
+    <string name="setup_no_vault_hint">Choose your Obsidian vault folder to get started. The vault must be in shared storage, not Obsidian\'s private app storage.</string>
     <string name="setup_pick_vault">Choose vault folder</string>
-    <string name="setup_invalid">That folder doesn\'t look like an Obsidian vault (no .obsidian inside). If your vault uses Obsidian\'s private app storage, move it to a shared folder first (Settings → About → Vault location on Android).</string>
-    <string name="config_search_hint">Search notes…</string>
-    <string name="setup_widgets_header">Active widgets: %1$d</string>
-    <string name="setup_no_widgets">None yet — place one from the home screen.</string>
+    <string name="setup_change_vault">Change vault</string>
+    <string name="setup_invalid">That folder doesn\'t look like an Obsidian vault (no .obsidian inside).</string>
+    <string name="setup_invalid_hint">If your vault uses Obsidian\'s private app storage, move it to a shared folder first: Settings → About → Vault location on Android.</string>
+    <string name="setup_connected">Connected to %1$s</string>
+    <string name="setup_counting">Counting notes…</string>
+    <string name="setup_note_count">%1$d notes found.</string>
+    <string name="setup_note_count_one">1 note found.</string>
+    <string name="setup_place_hint">To add a widget, long-press your home screen, open Widgets, and pick Obsidian Widget.</string>
+    <string name="setup_widgets_header">Your widgets</string>
+    <string name="setup_widgets_header_count">Your widgets (%1$d)</string>
+    <string name="setup_no_widgets">No widgets on your home screen yet.</string>
     <string name="setup_refresh">Refresh all widgets</string>
-    <string name="setup_edit">Edit</string>
+    <string name="setup_edit">Settings</string>
     <string name="setup_refreshed">Widgets refreshed</string>
-    <string name="config_theme_label">Widget theme</string>
+    <string name="setup_daily_note">Today\'s daily note</string>
+    <string name="setup_not_configured">No note chosen</string>
+    <string name="setup_meta_theme">%1$s theme</string>
+    <string name="setup_meta_opacity">%1$d%% opacity</string>
+    <string name="setup_meta_small">Small text</string>
+    <string name="setup_meta_large">Large text</string>
+    <string name="setup_meta_hide_done">Hides completed</string>
+
+    <!-- Widget settings screen -->
+    <string name="config_title">Widget settings</string>
+    <string name="config_search_hint">Search notes</string>
+    <string name="config_theme_label">Theme</string>
     <string name="config_theme_system">System</string>
     <string name="config_theme_light">Light</string>
     <string name="config_theme_dark">Dark</string>
@@ -19,19 +40,47 @@
     <string name="config_font_medium">Default</string>
     <string name="config_font_large">Large</string>
     <string name="config_hide_done">Hide completed tasks</string>
-    <string name="config_show_count">Show open-task count in title</string>
-    <string name="config_daily">📅 Show today\'s daily note</string>
-    <string name="widget_edit_glyph">✏️</string>
+    <string name="config_show_count">Show open-task count in the title</string>
+    <string name="config_note_label">Note to show</string>
+    <string name="config_daily">Show today\'s daily note</string>
+    <string name="config_no_matches">No notes match “%1$s”.</string>
+    <string name="config_loading">Reading your vault…</string>
+    <string name="config_no_notes">No notes found in this vault.</string>
+
+    <!-- Widget -->
+    <string name="widget_description">A note from your vault, rendered on the home screen. Tap tasks to tick them off.</string>
+    <string name="widget_edit_glyph">✎</string>
     <string name="widget_settings_glyph">⚙</string>
-    <string name="widget_empty">No note selected or note unreadable.\nTap to open the app.</string>
+    <string name="widget_open_obsidian">Open in Obsidian</string>
+    <string name="widget_settings">Widget settings</string>
+    <string name="widget_collapse_all">Collapse all sections</string>
+    <string name="widget_expand_all">Expand all sections</string>
+    <string name="widget_task_done">Done. Tap to reopen.</string>
+    <string name="widget_task_open">Open. Tap to mark done.</string>
+    <string name="widget_empty_no_vault">No vault connected.\nTap to set one up.</string>
+    <string name="widget_empty_no_note">No note chosen.\nTap to pick one.</string>
+    <string name="widget_empty_no_daily">No daily note for today yet.\nCreate %1$s in Obsidian, or tap to pick another note.</string>
+    <string name="widget_empty_unreadable">Couldn\'t read “%1$s”.\nTap to pick another note.</string>
+    <string name="widget_empty_blank">This note is empty.</string>
+
+    <!-- Popup viewer / editor -->
     <string name="editor_save">Save</string>
     <string name="editor_cancel">Cancel</string>
     <string name="editor_edit">Edit</string>
     <string name="editor_close">Close</string>
+    <string name="editor_hint">Write markdown…</string>
     <string name="editor_conflict_title">Note changed on disk</string>
     <string name="editor_conflict_msg">This note was modified (probably by sync) while you were editing. Overwrite with your version, or reload the new one and lose your edits?</string>
     <string name="editor_overwrite">Overwrite</string>
     <string name="editor_reload">Reload</string>
     <string name="editor_load_error">Couldn\'t read the note. Check vault access in the app.</string>
     <string name="editor_save_error">Couldn\'t save the note.</string>
+
+    <!-- Widget picker preview (static sample content) -->
+    <string name="preview_title">Today</string>
+    <string name="preview_heading">Morning</string>
+    <string name="preview_task_1">Reply to Sam about the draft</string>
+    <string name="preview_task_2">Stretch, then coffee</string>
+    <string name="preview_task_3">Sketch the widget header</string>
+    <string name="preview_quote">Small steps, daily.</string>
 </resources>

@@ -1,4 +1,16 @@
 <resources>
+    <!-- Warm paper palette (Claude Code Obsidian Theme). The dark variant lives
+         in values-night/colors.xml; the widget itself picks its palette in code
+         (Theme.kt) so a widget can be forced light or dark independently. -->
     <color name="icon_bg">#F9F3E7</color>
-    <color name="accent">#D97757</color>
+    <color name="accent">#C15F3C</color>
+    <color name="on_accent">#FFFAF5</color>
+    <color name="paper">#F9F3E7</color>
+    <color name="paper_card">#F1EADB</color>
+    <color name="paper_stroke">#E6E3D8</color>
+    <color name="ink">#34322C</color>
+    <color name="ink_heading">#1A1915</color>
+    <color name="ink_muted">#6E6A5C</color>
+    <color name="ink_faint">#9A9684</color>
+    <color name="code_bg">#E8DFCC</color>
 </resources>

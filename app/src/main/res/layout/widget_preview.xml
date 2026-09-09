@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Static preview for the launcher's widget picker. Mirrors widget_note.xml
+     with sample rows; colors follow the device theme via values-night. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg_preview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="2dp"
+                android:paddingEnd="0dp"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="@string/preview_title"
+                android:textColor="@color/ink_heading" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/accent"
+                android:text="@string/widget_edit_glyph" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:paddingEnd="2dp"
+                android:textSize="17sp"
+                android:textColor="@color/accent"
+                android:text="@string/widget_settings_glyph" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="3dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="@string/preview_heading"
+            android:textColor="@color/ink_heading" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="2dp"
+                android:paddingEnd="14dp"
+                android:textSize="17sp"
+                android:text="☑"
+                android:textColor="@color/accent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/preview_task_2"
+                android:textColor="@color/ink_muted" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="2dp"
+                android:paddingEnd="14dp"
+                android:textSize="17sp"
+                android:text="☐"
+                android:textColor="@color/accent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/preview_task_1"
+                android:textColor="@color/ink" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="2dp"
+                android:paddingEnd="14dp"
+                android:textSize="17sp"
+                android:text="☐"
+                android:textColor="@color/accent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/preview_task_3"
+                android:textColor="@color/ink" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="3dp"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:text="@string/preview_quote"
+            android:textColor="@color/ink_muted" />
+    </LinearLayout>
+</FrameLayout>

@@ -5,8 +5,10 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:background="@drawable/bg_card"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_marginBottom="10dp"
-    android:paddingHorizontal="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="8dp"
     android:paddingVertical="12dp">
 
     <LinearLayout
@@ -21,6 +23,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/ink_heading"
             android:singleLine="true"
             android:ellipsize="end" />
 
@@ -29,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:alpha="0.65"
+            android:textColor="@color/ink_muted"
             android:paddingTop="2dp" />
     </LinearLayout>
 

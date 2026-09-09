@@ -13,77 +13,92 @@
         android:src="@drawable/widget_bg_dark"
         android:importantForAccessibility="no" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingBottom="6dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
+
+        <!-- Header: the title fills and ellipsizes; the three action glyphs
+             cluster on the right in one weight and one color. Every child is a
+             RemoteViews-allowed class (no plain <View>). -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:id="@+id/widget_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="2dp"
+                android:paddingEnd="8dp"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/ink_heading" />
+
+            <TextView
+                android:id="@+id/btn_fold_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:textSize="16sp"
+                android:textColor="@color/accent" />
+
+            <TextView
+                android:id="@+id/btn_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:textSize="17sp"
+                android:textColor="@color/accent"
+                android:contentDescription="@string/widget_open_obsidian"
+                android:text="@string/widget_edit_glyph" />
+
+            <TextView
+                android:id="@+id/btn_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="36dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:paddingStart="6dp"
+                android:paddingEnd="2dp"
+                android:textSize="17sp"
+                android:textColor="@color/accent"
+                android:contentDescription="@string/widget_settings"
+                android:text="@string/widget_settings_glyph" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/block_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
 
         <TextView
-            android:id="@+id/widget_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="160dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColor="?android:attr/textColorPrimary" />
-
-        <!-- Collapse-all / expand-all; hugs the title (and its task count). -->
-        <TextView
-            android:id="@+id/btn_fold_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:textSize="15sp"
-            android:textColor="@color/accent" />
-
-        <!-- Spacer: must be a RemoteViews-allowed class — a plain <View> makes
-             the launcher fail to inflate the widget ("Couldn't add widget"). -->
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/btn_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:textSize="16sp"
-            android:text="@string/widget_edit_glyph" />
-
-        <TextView
-            android:id="@+id/btn_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/accent"
-            android:text="@string/widget_settings_glyph" />
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="16dp"
+            android:lineSpacingExtra="3dp"
+            android:textSize="14sp"
+            android:text="@string/widget_empty_no_note"
+            android:textColor="@color/ink_muted" />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/block_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
-
-    <TextView
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/widget_empty"
-        android:textColor="?android:attr/textColorSecondary" />
-</LinearLayout>
 </FrameLayout>

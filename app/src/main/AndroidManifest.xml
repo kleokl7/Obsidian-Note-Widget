@@ -14,7 +14,10 @@
         <!-- Launcher configure flow: must keep the default taskAffinity — in its
              own task, setResult() never reaches the launcher and the widget is
              removed with "Couldn't add widget". -->
-        <activity android:name=".config.WidgetConfigActivity" android:exported="false">
+        <activity
+            android:name=".config.WidgetConfigActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -24,6 +27,7 @@
         <activity
             android:name=".config.WidgetReconfigActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:excludeFromRecents="true"
             android:taskAffinity="" />
         <!-- Empty taskAffinity: launching with NEW_TASK must NOT bring the app's

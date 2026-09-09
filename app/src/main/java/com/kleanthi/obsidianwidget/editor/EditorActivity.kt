@@ -104,12 +104,13 @@ class EditorActivity : AppCompatActivity() {
     private fun renderNote(content: String) {
         renderList.removeAllViews()
         val density = resources.displayMetrics.density
-        for (b in MarkdownParser.parse(content)) {
+        for ((index, b) in MarkdownParser.parse(content).withIndex()) {
             val tv = TextView(this)
             tv.textSize = 15f
             val indent = (b.indent * 16 * density).toInt()
             val vpad = (4 * density).toInt()
-            tv.setPadding(indent, vpad, 0, vpad)
+            val top = if (b.type == BlockType.HEADING && index > 0) (12 * density).toInt() else vpad
+            tv.setPadding(indent, top, 0, vpad)
             if (b.type == BlockType.TASK) {
                 val glyph = SpanMapper.taskGlyph(b.state)
                 val body = SpanMapper.toSpannable(
@@ -163,6 +164,12 @@ class EditorActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.editor_title).setTextColor(p.heading)
         editor.setTextColor(p.text)
         editor.setHintTextColor(p.faint)
+        // The widget may be forced light/dark, so the field can't rely on
+        // the day/night resource; tint it from the same palette.
+        editor.background = GradientDrawable().apply {
+            cornerRadius = 12 * resources.displayMetrics.density
+            setColor(p.codeBg)
+        }
 
         btnEditMode.setTextColor(p.accent)
         btnCancel.setTextColor(p.muted)

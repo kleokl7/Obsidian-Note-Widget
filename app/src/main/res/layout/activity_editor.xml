@@ -4,7 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="10dp"
     android:minWidth="320dp">
 
     <TextView
@@ -12,8 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:paddingBottom="8dp" />
+        android:textSize="17sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:paddingBottom="10dp" />
 
     <!-- View mode: rendered markdown with tappable task checkboxes. -->
     <ScrollView
@@ -21,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:minHeight="220dp">
+        android:minHeight="220dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/render_list"
@@ -30,7 +35,7 @@
             android:orientation="vertical" />
     </ScrollView>
 
-    <!-- Edit mode: raw markdown. -->
+    <!-- Edit mode: raw markdown in a quiet inset field. -->
     <EditText
         android:id="@+id/editor_text"
         android:layout_width="match_parent"
@@ -40,18 +45,21 @@
         android:maxHeight="420dp"
         android:gravity="top|start"
         android:inputType="textMultiLine|textNoSuggestions"
+        android:hint="@string/editor_hint"
         android:typeface="monospace"
         android:textSize="14sp"
+        android:lineSpacingExtra="2dp"
+        android:padding="12dp"
         android:scrollbars="vertical"
         android:visibility="gone"
-        android:background="@android:color/transparent" />
+        android:background="@drawable/bg_field" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="end"
-        android:paddingTop="8dp">
+        android:paddingTop="10dp">
 
         <Button
             android:id="@+id/btn_edit_mode"
@@ -59,6 +67,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/editor_edit" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btn_cancel"
@@ -71,6 +84,7 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="@string/editor_save" />
     </LinearLayout>
 </LinearLayout>

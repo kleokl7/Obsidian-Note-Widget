@@ -3,36 +3,67 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:background="?android:attr/colorBackground"
+    android:paddingHorizontal="@dimen/page_margin"
+    android:paddingTop="20dp">
 
     <TextView
-        android:id="@+id/status_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:textSize="16sp"
-        android:text="@string/setup_no_vault" />
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.ScreenTitle"
+        android:text="@string/app_name" />
 
-    <Button
-        android:id="@+id/pick_button"
-        android:layout_width="wrap_content"
+    <!-- Vault: state line, a hint that changes with the state, one action. -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/setup_pick_vault" />
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_card"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp">
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.ObsidianWidget.Section"
+            android:textSize="16sp"
+            android:text="@string/setup_no_vault" />
+
+        <TextView
+            android:id="@+id/status_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:textSize="14sp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/ink_muted"
+            android:text="@string/setup_no_vault_hint" />
+
+        <Button
+            android:id="@+id/pick_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/setup_pick_vault" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/widgets_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:layout_marginTop="28dp"
+        android:paddingBottom="10dp"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.Section"
+        android:textSize="16sp"
+        android:text="@string/setup_widgets_header" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:id="@+id/widget_list"
@@ -41,20 +72,32 @@
             android:orientation="vertical" />
     </ScrollView>
 
-    <Button
-        android:id="@+id/refresh_button"
-        style="?attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/setup_refresh" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/version_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingBottom="8dp"
-        android:textSize="12sp"
-        android:alpha="0.6" />
+        <Button
+            android:id="@+id/refresh_button"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-8dp"
+            android:text="@string/setup_refresh" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/version_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/ink_faint" />
+    </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <!-- Warm charcoal palette (Claude Code Obsidian Theme). -->
+    <color name="accent">#D97757</color>
+    <color name="on_accent">#1A1915</color>
+    <color name="paper">#262624</color>
+    <color name="paper_card">#2E2D2A</color>
+    <color name="paper_stroke">#393833</color>
+    <color name="ink">#E6E4DC</color>
+    <color name="ink_heading">#F6F4EE</color>
+    <color name="ink_muted">#A8A496</color>
+    <color name="ink_faint">#767264</color>
+    <color name="code_bg">#1F1B15</color>
+</resources>

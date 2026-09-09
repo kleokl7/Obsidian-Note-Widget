@@ -131,6 +131,10 @@ class NoteRemoteViewsFactory(
             } else body
             rv.setTextViewText(R.id.task_text, text)
             rv.setTextColor(R.id.task_text, if (b.checked) palette.muted else palette.text)
+            rv.setContentDescription(
+                R.id.task_checkbox,
+                context.getString(if (b.checked) R.string.widget_task_done else R.string.widget_task_open)
+            )
             // setViewPadding sets all four sides — keep the XML's 4dp vertical padding.
             val pad = (4 * density).toInt()
             rv.setViewPadding(R.id.task_row, (b.indent * 16 * density).toInt(), pad, 0, pad)
@@ -166,7 +170,10 @@ class NoteRemoteViewsFactory(
             rv.setTextColor(R.id.block_text, palette.text)
             rv.setTextViewTextSize(R.id.block_text, TypedValue.COMPLEX_UNIT_SP, fontSize.body)
             val pad = (3 * density).toInt()
-            rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), pad, 0, pad)
+            // Headings open a section: extra air above them (not for the first row)
+            // gives the note its rhythm without divider lines.
+            val topPad = if (b.type == BlockType.HEADING && position > 0) (10 * density).toInt() else pad
+            rv.setViewPadding(R.id.block_text, (b.indent * 16 * density).toInt(), topPad, 0, pad)
 
             // Headings fold their section; other rows open the popup editor.
             rv.setOnClickFillInIntent(R.id.block_text, Intent().apply {

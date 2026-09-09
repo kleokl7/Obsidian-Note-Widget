@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header of the settings list (activity_config.xml). Everything above the
+     note list scrolls with it, so the search box and results stay reachable
+     when the keyboard is open. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.ScreenTitle"
+        android:text="@string/config_title" />
+
+    <!-- Appearance: four settings, one label each, 12dp between groups. -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.Section"
+        android:text="@string/config_theme_label" />
+
+    <RadioGroup
+        android:id="@+id/theme_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="-6dp">
+
+        <RadioButton
+            android:id="@+id/theme_system"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/config_theme_system" />
+
+        <RadioButton
+            android:id="@+id/theme_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/config_theme_light" />
+
+        <RadioButton
+            android:id="@+id/theme_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_theme_dark" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/opacity_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.Section" />
+
+    <SeekBar
+        android:id="@+id/opacity_seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="10"
+        android:max="100"
+        android:paddingVertical="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.Section"
+        android:text="@string/config_font_label" />
+
+    <RadioGroup
+        android:id="@+id/font_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="-6dp">
+
+        <RadioButton
+            android:id="@+id/font_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/config_font_small" />
+
+        <RadioButton
+            android:id="@+id/font_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/config_font_medium" />
+
+        <RadioButton
+            android:id="@+id/font_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/config_font_large" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/hide_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="-6dp"
+        android:text="@string/config_hide_done" />
+
+    <CheckBox
+        android:id="@+id/show_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-6dp"
+        android:text="@string/config_show_count" />
+
+    <!-- Note: choosing one saves and closes the screen. -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAppearance="@style/TextAppearance.ObsidianWidget.Section"
+        android:text="@string/config_note_label" />
+
+    <Button
+        android:id="@+id/daily_button"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/config_daily" />
+
+    <EditText
+        android:id="@+id/search_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/config_search_hint"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/note_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:textSize="14sp"
+        android:textColor="@color/ink_muted"
+        android:text="@string/config_loading" />
+
+</LinearLayout>

@@ -44,10 +44,11 @@ class NoteWidgetProvider : AppWidgetProvider() {
             )
             views.setTextColor(R.id.widget_title, palette.heading)
             views.setTextColor(R.id.btn_settings, palette.accent)
+            views.setTextColor(R.id.btn_edit, palette.accent)
             views.setTextColor(R.id.empty_view, palette.muted)
 
-            val blocks = notePath?.let { repo.readNote(it) }
-                ?.let { MarkdownParser.parse(it) } ?: emptyList()
+            val content = notePath?.let { repo.readNote(it) }
+            val blocks = content?.let { MarkdownParser.parse(it) } ?: emptyList()
 
             val titleName = notePath?.substringAfterLast('/')?.removeSuffix(".md")
                 ?: if (prefNote == WidgetPrefs.DAILY) "Daily note" else "Obsidian Widget"
@@ -69,6 +70,12 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 val anyCollapsed =
                     WidgetPrefs.getCollapsedHeadings(context, appWidgetId).isNotEmpty()
                 views.setTextViewText(R.id.btn_fold_all, if (anyCollapsed) "⊕" else "⊖")
+                views.setContentDescription(
+                    R.id.btn_fold_all,
+                    context.getString(
+                        if (anyCollapsed) R.string.widget_expand_all else R.string.widget_collapse_all
+                    )
+                )
                 views.setTextColor(R.id.btn_fold_all, palette.accent)
                 val foldAllIntent = Intent(context, WidgetActionActivity::class.java)
                     .putExtra(EXTRA_WIDGET_ID, appWidgetId)
@@ -104,7 +111,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 )
             )
 
-            // ✏️ opens this note in the Obsidian app.
+            // ✎ opens this note in the Obsidian app.
             val vaultName = repo.vaultName
             if (vaultName != null && notePath != null) {
                 val deepLink = Intent(
@@ -136,13 +143,43 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 )
             )
 
-            // Tapping the empty state opens the app.
+            // Empty state: name the problem and send the tap to the fix.
+            // The common path (note read fine) skips the vault checks entirely.
+            val noteName = notePath?.substringAfterLast('/')?.removeSuffix(".md")
+            val emptyText: String
+            val emptyTarget: Intent
+            when {
+                content != null -> {
+                    emptyText = context.getString(R.string.widget_empty_blank)
+                    emptyTarget = Intent(context, WidgetActionActivity::class.java)
+                        .putExtra(EXTRA_WIDGET_ID, appWidgetId)
+                        .putExtra(EXTRA_ACTION, ACT_EDIT)
+                        .setData(Uri.parse("obsidianwidget://empty/$appWidgetId"))
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                repo.vaultUri == null || !repo.isValidVault() -> {
+                    emptyText = context.getString(R.string.widget_empty_no_vault)
+                    emptyTarget = Intent(context, com.kleanthi.obsidianwidget.setup.SetupActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                prefNote == null -> {
+                    emptyText = context.getString(R.string.widget_empty_no_note)
+                    emptyTarget = settingsIntent
+                }
+                notePath == null -> {
+                    emptyText = context.getString(R.string.widget_empty_no_daily, WidgetPrefs.todayName())
+                    emptyTarget = settingsIntent
+                }
+                else -> {
+                    emptyText = context.getString(R.string.widget_empty_unreadable, noteName)
+                    emptyTarget = settingsIntent
+                }
+            }
+            views.setTextViewText(R.id.empty_view, emptyText)
             views.setOnClickPendingIntent(
                 R.id.empty_view,
                 PendingIntent.getActivity(
-                    context, appWidgetId * 8 + 3,
-                    Intent(context, com.kleanthi.obsidianwidget.setup.SetupActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                    context, appWidgetId * 8 + 3, emptyTarget,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
             )
