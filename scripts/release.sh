@@ -45,7 +45,11 @@ tag="v$name"
 note "version $name (versionCode $code)"
 
 # --- repository state --------------------------------------------------------
-[ -z "$(git status --porcelain)" ] || blocker "the working tree has uncommitted changes"
+[ -z "$(git status --porcelain --untracked-files=no)" ] ||
+  blocker "tracked files have uncommitted changes"
+# Untracked files elsewhere (notes, docs) can't end up in the APK; these can.
+untracked="$(git ls-files --others --exclude-standard -- app gradle '*.gradle.kts' gradle.properties)"
+[ -z "$untracked" ] || blocker "untracked files in the build inputs:"$'\n'"$untracked"
 branch="$(git rev-parse --abbrev-ref HEAD)"
 [ "$branch" = main ] || blocker "releases are made from main, not $branch"
 
