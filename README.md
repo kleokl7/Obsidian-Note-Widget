@@ -55,9 +55,13 @@ refresh.
 
 ## Build
 
-Needs Android SDK 34 (point `local.properties` at it, or set `ANDROID_HOME`).
+Needs JDK 17 or later (set `JAVA_HOME`, or have `java` on your `PATH`) and
+Android SDK 34 (point `local.properties` at it, or set `ANDROID_HOME`).
 
-- `./gradlew assembleDebug` — works out of the box, signed with the debug key.
+- `./gradlew assembleDebug` — signed with the debug key.
+- `./gradlew testDebugUnitTest lintDebug` — unit tests and Android lint. CI
+  runs both on every push; lint errors (such as a view the widget can't
+  inflate) fail the build.
 - `./gradlew assembleRelease` — needs your own signing key. Generate one with
   `keytool -genkeypair -keystore release.keystore -alias <alias>` and create a
   `keystore.properties` in the project root (both are git-ignored):
