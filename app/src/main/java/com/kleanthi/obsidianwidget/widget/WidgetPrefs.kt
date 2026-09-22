@@ -87,21 +87,17 @@ object WidgetPrefs {
 
     // Fold state: tasks are folded by default; this stores the expanded ones,
     // keyed by task text so the state survives line-number shifts.
-    fun isExpanded(context: Context, appWidgetId: Int, key: String): Boolean =
-        prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!.contains(key)
+    fun getExpanded(context: Context, appWidgetId: Int): Set<String> =
+        prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!
 
     fun toggleExpanded(context: Context, appWidgetId: Int, key: String) {
-        val cur = HashSet(prefs(context).getStringSet("expanded_$appWidgetId", emptySet())!!)
+        val cur = HashSet(getExpanded(context, appWidgetId))
         if (!cur.add(key)) cur.remove(key)
         prefs(context).edit().putStringSet("expanded_$appWidgetId", cur).apply()
     }
 
     // Heading fold state: headings are expanded by default; this stores the
-    // collapsed ones. Keys carry an occurrence index ("Today#1") because the
-    // same heading text often repeats within a note.
-    fun isHeadingCollapsed(context: Context, appWidgetId: Int, key: String): Boolean =
-        getCollapsedHeadings(context, appWidgetId).contains(key)
-
+    // collapsed ones, keyed by Outline.headingKeys ("Today#1").
     fun toggleHeadingCollapsed(context: Context, appWidgetId: Int, key: String) {
         val cur = HashSet(getCollapsedHeadings(context, appWidgetId))
         if (!cur.add(key)) cur.remove(key)

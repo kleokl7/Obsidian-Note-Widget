@@ -10,10 +10,10 @@ import android.util.TypedValue
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.kleanthi.obsidianwidget.R
-import com.kleanthi.obsidianwidget.core.Block
 import com.kleanthi.obsidianwidget.core.BlockType
 import com.kleanthi.obsidianwidget.core.InlineStyler
 import com.kleanthi.obsidianwidget.core.MarkdownParser
+import com.kleanthi.obsidianwidget.core.Outline
 import com.kleanthi.obsidianwidget.vault.VaultRepository
 
 class NoteWidgetService : RemoteViewsService() {
@@ -29,80 +29,25 @@ class NoteRemoteViewsFactory(
     private val appWidgetId: Int
 ) : RemoteViewsService.RemoteViewsFactory {
 
-    private data class Row(
-        val block: Block,
-        val foldable: Boolean,
-        val expanded: Boolean,
-        val hidden: Int,
-        val openTasks: Int = -1,      // headings: open tasks in section (-1 = no tasks at all)
-        val headKey: String? = null,  // headings: fold-state key ("text#occurrence")
-    )
-
-    private var rows: List<Row> = emptyList()
+    private var rows: List<Outline.Row> = emptyList()
     private var palette: Palette = Themes.DARK
     private var fontSize: FontSize = FontSize.MEDIUM
-    private var hideDone: Boolean = false
-
-    private val childTypes = setOf(BlockType.TASK, BlockType.BULLET, BlockType.PARAGRAPH, BlockType.QUOTE)
 
     override fun onCreate() {}
 
     override fun onDataSetChanged() {
         palette = Themes.forWidget(context, appWidgetId)
         fontSize = WidgetPrefs.getFontSize(context, appWidgetId)
-        hideDone = WidgetPrefs.getHideDone(context, appWidgetId)
         val repo = VaultRepository(context)
         val path = WidgetPrefs.resolveNote(context, appWidgetId, repo)
         val content = path?.let { repo.readNote(it) }
         val blocks = content?.let { MarkdownParser.parse(it) } ?: emptyList()
-        rows = buildRows(blocks)
-    }
-
-    /**
-     * Tasks with indented children fold (folded children are skipped), and
-     * headings fold their whole section — everything up to the next heading
-     * of the same or higher level.
-     */
-    private fun buildRows(blocks: List<Block>): List<Row> {
-        val out = mutableListOf<Row>()
-        val headSeen = mutableMapOf<String, Int>()
-        var i = 0
-        while (i < blocks.size) {
-            val b = blocks[i]
-            if (b.type == BlockType.HEADING) {
-                var j = i + 1
-                while (j < blocks.size &&
-                    !(blocks[j].type == BlockType.HEADING && blocks[j].level <= b.level)) j++
-                var tasks = 0
-                var open = 0
-                for (k in i + 1 until j) {
-                    val t = blocks[k]
-                    if (t.type == BlockType.TASK) {
-                        tasks++
-                        if (!t.checked && t.state != '-') open++
-                    }
-                }
-                val n = headSeen.merge(b.text, 1, Int::plus)!!
-                val key = "${b.text}#$n"
-                val collapsed = WidgetPrefs.isHeadingCollapsed(context, appWidgetId, key)
-                out.add(Row(b, foldable = true, expanded = !collapsed, hidden = 0,
-                    openTasks = if (tasks > 0) open else -1, headKey = key))
-                i = if (collapsed) j else i + 1
-            } else if (b.type == BlockType.TASK) {
-                var j = i + 1
-                while (j < blocks.size && blocks[j].type in childTypes && blocks[j].indent > b.indent) j++
-                // Hidden completed tasks take their indented children with them.
-                if (hideDone && (b.checked || b.state == '-')) { i = j; continue }
-                val kids = j - i - 1
-                val expanded = kids > 0 && WidgetPrefs.isExpanded(context, appWidgetId, b.text)
-                out.add(Row(b, kids > 0, expanded, kids))
-                i = if (kids > 0 && !expanded) j else i + 1
-            } else {
-                out.add(Row(b, false, false, 0))
-                i++
-            }
-        }
-        return out
+        rows = Outline.buildRows(
+            blocks,
+            expanded = WidgetPrefs.getExpanded(context, appWidgetId),
+            collapsed = WidgetPrefs.getCollapsedHeadings(context, appWidgetId),
+            hideDone = WidgetPrefs.getHideDone(context, appWidgetId),
+        )
     }
 
     private fun glyph(state: Char): String = SpanMapper.taskGlyph(state)

@@ -5,8 +5,8 @@ import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
 import com.kleanthi.obsidianwidget.R
-import com.kleanthi.obsidianwidget.core.BlockType
 import com.kleanthi.obsidianwidget.core.MarkdownParser
+import com.kleanthi.obsidianwidget.core.Outline
 import com.kleanthi.obsidianwidget.core.TaskToggler
 import com.kleanthi.obsidianwidget.core.ToggleResult
 import com.kleanthi.obsidianwidget.editor.EditorActivity
@@ -57,19 +57,16 @@ class WidgetActionActivity : Activity() {
                 val path = WidgetPrefs.resolveNote(this, widgetId, repo)
                 val content = path?.let { repo.readNote(it) }
                 if (content != null) {
-                    if (WidgetPrefs.getCollapsedHeadings(this, widgetId).isEmpty()) {
-                        // Collapse all: keys mirror the factory's "text#occurrence" scheme.
-                        val seen = mutableMapOf<String, Int>()
-                        val keys = mutableSetOf<String>()
-                        for (b in MarkdownParser.parse(content)) {
-                            if (b.type == BlockType.HEADING) {
-                                keys.add("${b.text}#${seen.merge(b.text, 1, Int::plus)!!}")
-                            }
-                        }
-                        WidgetPrefs.setCollapsedHeadings(this, widgetId, keys)
-                    } else {
-                        WidgetPrefs.setCollapsedHeadings(this, widgetId, emptySet())
-                    }
+                    // Same test as the header glyph: ⊖ collapses every section,
+                    // ⊕ expands them all (and drops keys of vanished headings).
+                    val blocks = MarkdownParser.parse(content)
+                    val collapse = !Outline.anyCollapsed(
+                        blocks, WidgetPrefs.getCollapsedHeadings(this, widgetId)
+                    )
+                    WidgetPrefs.setCollapsedHeadings(
+                        this, widgetId,
+                        if (collapse) Outline.headingKeys(blocks).toSet() else emptySet()
+                    )
                 }
                 NoteWidgetProvider.updateWidget(this, AppWidgetManager.getInstance(this), widgetId)
             }

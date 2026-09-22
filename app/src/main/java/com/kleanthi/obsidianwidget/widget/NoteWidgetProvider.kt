@@ -15,6 +15,7 @@ import com.kleanthi.obsidianwidget.R
 import com.kleanthi.obsidianwidget.config.WidgetReconfigActivity
 import com.kleanthi.obsidianwidget.core.BlockType
 import com.kleanthi.obsidianwidget.core.MarkdownParser
+import com.kleanthi.obsidianwidget.core.Outline
 import com.kleanthi.obsidianwidget.vault.VaultRepository
 
 class NoteWidgetProvider : AppWidgetProvider() {
@@ -54,9 +55,7 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 ?: if (prefNote == WidgetPrefs.DAILY) "Daily note" else "Obsidian Widget"
             val title = SpannableStringBuilder(titleName)
             if (WidgetPrefs.getShowCount(context, appWidgetId) && blocks.isNotEmpty()) {
-                val open = blocks.count {
-                    it.type == BlockType.TASK && !it.checked && it.state != '-'
-                }
+                val open = Outline.openTaskCount(blocks)
                 val start = title.length
                 title.append("  ($open)")
                 title.setSpan(ForegroundColorSpan(palette.faint),
@@ -67,8 +66,9 @@ class NoteWidgetProvider : AppWidgetProvider() {
             // ⊖/⊕ collapses or expands every heading section at once.
             if (blocks.any { it.type == BlockType.HEADING }) {
                 views.setViewVisibility(R.id.btn_fold_all, View.VISIBLE)
-                val anyCollapsed =
-                    WidgetPrefs.getCollapsedHeadings(context, appWidgetId).isNotEmpty()
+                val anyCollapsed = Outline.anyCollapsed(
+                    blocks, WidgetPrefs.getCollapsedHeadings(context, appWidgetId)
+                )
                 views.setTextViewText(R.id.btn_fold_all, if (anyCollapsed) "⊕" else "⊖")
                 views.setContentDescription(
                     R.id.btn_fold_all,
