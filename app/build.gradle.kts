@@ -14,8 +14,8 @@ android {
         applicationId = "com.kleanthi.obsidianwidget"
         minSdk = 31
         targetSdk = 34
-        versionCode = 12
-        versionName = "0.4.7"
+        versionCode = 13
+        versionName = "0.4.8"
     }
 
     signingConfigs {
