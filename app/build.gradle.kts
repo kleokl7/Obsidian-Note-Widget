@@ -42,6 +42,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
+
+    lint {
+        // Widget layouts may only use RemoteViews-supported classes: a plain
+        // <View> made launchers reject the widget ("Couldn't add widget",
+        // v0.4.3–v0.4.4). Fatal, so assembleRelease's lintVital pass stops it too.
+        fatal += "RemoteViewLayout"
+    }
 }
 
 dependencies {
